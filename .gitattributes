@@ -1,0 +1,22 @@
+# 统一换行为 LF —— 避免 Windows 的 autocrlf 把 md 改写成 CRLF，产生满屏假 diff
+* text=auto eol=lf
+
+# 明确二进制：不做换行转换，git 也不试图 diff
+*.pdf   binary
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.zip   binary
+*.db    binary
+*.sqlite binary
+
+# 文本类显式声明，保证 diff 可读
+*.md    text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.js    text eol=lf
+*.mjs   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
