@@ -138,6 +138,11 @@ class Character {
     const dyn = this.dynamics.step(ar.dE, this.mu.vector, {
       eventKey: ev.eventKey || null,
       g: gGain * gStrategy,
+      // ⚠️ 2026-10-13 修正：B2 的情境名原先【没有透传】——
+      //    dynamics 那边支持 opts.context，但 Character 这一层从没传过，
+      //    导致 rhoByContext 走 Character 完全用不上（只能直接调 Dynamics）。
+      //    ⭐ 走 ev.context.scene（避免与 ev.context 这个对象本身重名）。
+      context: ctx.scene,
     });
     this.E = dyn.E;
 
@@ -160,6 +165,14 @@ class Character {
       h: dyn.h,
       exposure: dyn.exposure,
       gGain, gStrategy,
+      // ⚠️ 2026-10-13 修正：下面这几个原先【没有透传】——
+      //    dynamics.step() 已经算出来了，engine 的 rec 却只取了 h/exposure/r/rRaw，
+      //    导致审计时看不出"实际乘进去的 g 是多少""实际用的 ρ 是哪个档"。
+      g: gGain * gStrategy,        // ⭐ 合成后的 g（真正乘进 ΔE 的那个）
+      rho: dyn.rho,                // ⭐ 实际用到的 ρ
+      rhoContext: dyn.rhoContext,  // ⭐ B2 情境调整后的 ρ（未启用为 null）
+      context: dyn.context,        // ⭐ 本轮生效的情境名
+      noveltyFired: dyn.noveltyFired, // ⭐ B3 是否触发新颖性复位
       r: dyn.r, rRaw: dyn.rRaw,
       // 表达
       E_inner: this.E.slice(),

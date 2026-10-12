@@ -143,7 +143,17 @@ function appraisalToDeltaE(a, ctx) {
 
   const dir = classifyDirection(a);
   if (!dir.direction) {
-    return { dE: [0, 0, 0], direction: null, octant: null, alpha: 0, eps: 0, note: dir.note };
+    // ⚠️ 2026-10-13 修正：这个 early return 原先【缺 valence 与 intensity】——
+    //    导致"无情感意义"那一轮的记录里这两项是 undefined，
+    //    审计时看不出"是相关性本来就近 0，还是别的原因"。
+    //    ⭐ 这两个量只是算术，照算即可；归零的是 ΔE，不是它们。
+    const primZero = primaryAppraisal(a);
+    return {
+      dE: [0, 0, 0], direction: null, octant: null,
+      alpha: 0, eps: 0, priorStrength: 0,
+      valence: primZero.valence, intensity: primZero.intensity,
+      note: dir.note,
+    };
   }
 
   const prim = primaryAppraisal(a);
