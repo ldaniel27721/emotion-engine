@@ -27,11 +27,21 @@ class Dynamics {
    * @param {boolean}  o.useCap  是否启用封顶
    * @param {number}   o.sigma   角色 σ（决定封顶的 k）
    */
-  constructor({ rho = 0.927, alpha = 0.95, useCap = true, sigma = 0.40 } = {}) {
+  constructor({ rho = 0.927, alpha = 0.95, useCap = true, sigma = 0.40,
+    // ⭐ docs/06 的 P0 两项 —— 均【默认关闭】，关闭时行为与 v0.1.2 完全一致
+    noveltyReset = false,      // B3: h(n) 自动新颖性复位
+    noveltyThreshold = 0.35,   // B3: 触发复位的相对阶跃阈值
+    rhoByValence = null,       // B1: { neg, mid, posMid, posHigh } 或 null
+  } = {}) {
     this.rho = rho;
     this.alpha = alpha;
     this.useCap = useCap;
     this.k = 1 / sigma;
+    this.sigmaOfK = sigma;     // ⭐ B1 判"高正性"用
+    // ⭐ B1/B3 开关
+    this.noveltyReset = noveltyReset;
+    this.noveltyThreshold = noveltyThreshold;
+    this.rhoByValence = rhoByValence;
     this.reset();
   }
 
@@ -51,6 +61,8 @@ class Dynamics {
     this.initial = this.E.slice();
     /** 暴露计数：按"事件类别"记，用于 h(n) */
     this.exposure = new Map();
+    /** ⭐ B3：按"事件类别"记上一次的 ΔE_raw，用于判"刺激是否变了" */
+    this._lastDE = new Map();
     /** 事件日志 */
     this.log = [];
   }
@@ -80,6 +92,28 @@ class Dynamics {
   step(dERaw, mu, opts = {}) {
     const { eventKey = null, g = 1, h = null, resetExposure = false } = opts;
 
+    // ═══════════════════════════════════════════════════════════
+    // ⭐ B3（docs/06）h(n) 的【自动】新颖性复位 —— 默认关闭
+    //
+    //   文献：Déniz et al. (2004) 的 Stanley ODE + "刺激单调性"判别器。
+    //        刺激一变 ⇒ 习惯化状态打回 0，重新敏感。
+    //   补法：判别信号用【已有的量】—— |ΔE_raw| 相对该类别的上次值发生阶跃。
+    //   ⚠️ 默认 noveltyReset=false ⇒ 行为与 v0.1.2 完全一致。
+    // ═══════════════════════════════════════════════════════════
+    let noveltyFired = false;
+    if (this.noveltyReset && eventKey !== null) {
+      const last = this._lastDE.get(eventKey);
+      if (last) {
+        const dev = V.norm(V.sub(dERaw, last));
+        const scale = Math.max(V.norm(last), 1e-6);
+        if (dev / scale > this.noveltyThreshold) {
+          this.exposure.set(eventKey, 0);      // ⭐ 复位：重新敏感
+          noveltyFired = true;
+        }
+      }
+      this._lastDE.set(eventKey, dERaw.slice());
+    }
+
     // ── h(n)：重复习惯化 ──
     let hn = h;
     if (hn === null) {
@@ -95,11 +129,30 @@ class Dynamics {
 
     // ── 自发回落 + 冲击 ──
     const dev = V.sub(this.E, mu);                       // E − μ
-    let next = V.add(mu, V.mul(dev, this.rho));           // ρ 回落
+
+    // ⭐ B1（docs/06）ρ 按效价分段 —— 默认关闭
+    //   文献：Sci. Rep. (2025) 15:36328 Table 3（渲染成图逐字读）
+    //         中等正性/中性 0.875 ｜ 高正性 0.805 ｜ 低/负性 0.451
+    //   ⚠️ 非单调：不是"越正越持久"
+    //   ⭐ 分段依据：当前偏离在 P 轴上的符号（正 / 中 / 负）
+    //   ⚠️ 默认 rhoByValence=null ⇒ 用单一 rho，行为与 v0.1.2 一致。
+    let rho = this.rho;
+    if (this.rhoByValence) {
+      const pPos = dev[0] > 0, pNeg = dev[0] < 0;
+      // 用偏离的强度相对于 σ 判"高正性"
+      const mag = V.norm(dev);
+      const isHigh = mag > 1.5 * this.sigmaOfK;
+      rho = pNeg ? this.rhoByValence.neg
+        : (pPos && isHigh) ? this.rhoByValence.posHigh
+          : pPos ? this.rhoByValence.posMid
+            : this.rhoByValence.mid;   // P 轴 ≈ 0 → 中性档
+    }
+
+    let next = V.add(mu, V.mul(dev, rho));                // ρ 回落
     const dEff = V.mul(dERaw, g * hn);                    // g·h·ΔE_raw
     next = V.add(next, dEff);
 
-    // ── ⭐ 封顶：对偏离量做非线性压缩 ──
+    // ── ⭐ 封顶：对偏离量做非线性压缩（v0.1.2 起为分段形式）──
     const rRaw = V.norm(V.sub(next, mu));
     let rFinal = rRaw;
     if (this.useCap) {
@@ -116,6 +169,8 @@ class Dynamics {
       rRaw,
       dE: dEff.slice(),
       g, h: hn,
+      rho,                       // ⭐ 实际用到的 ρ（便于审计 B1 生效）
+      noveltyFired,              // ⭐ B3 是否触发复位（便于审计）
       eventKey,
       exposure: eventKey === null ? null : this.exposure.get(eventKey),
     };
