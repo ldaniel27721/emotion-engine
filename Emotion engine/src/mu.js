@@ -57,6 +57,41 @@ class Mu {
     this._baseDir = this.dir.slice();
     this._baseRmu = this.rMu;
     this._drift = [0, 0, 0];   // 慢漂移累积（#43）
+    // ⭐ B5：信度的"刷新目标"（拿到新证据时回到这里）
+    this._basePrecision = precision;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // ⭐ B5（docs/06）precision 的时间动力学 —— 信度衰减
+  //
+  //   文献：Patrício & Jamshidnejad (2025) IEEE Access 的 EKF 心智状态估计——
+  //         R(k) = R0（有测量）否则 α·R(k−1)，α>1（实验 α=2）
+  //         原文："α models the rate of decay of the confidence in reused measurements"
+  //   ⭐ R 是【方差】；我们的 precision = 1/方差 ⇒ 无测量时 precision ← precision/α
+  //
+  //   ⚠️ 按 docs/06 的硬要求：【不要做在线自适应】。
+  //      该文自身的假设 3（forward-fill-evolving）被其自己的实验证伪，
+  //      forward-fill 就够了 —— 所以这里只有"刷新 / 衰减"两个动作，不做插值或拟合。
+  //
+  //   ⚠️ 默认不调用 ⇒ 不动 A3，行为与既有版本一致。
+  // ═══════════════════════════════════════════════════════════
+
+  /** ⭐ 拿到新证据 ⇒ 信度刷新（默认回到 _basePrecision） */
+  setPrecision(p = null) {
+    if (p !== null) this._basePrecision = p;
+    this.precision = this._basePrecision;
+    return this.precision;
+  }
+
+  /** ⭐ 无新证据 ⇒ 信度衰减：precision ← precision/α（α>1） */
+  decayPrecision(alpha = 2.0, floor = 0.05) {
+    this.precision = Math.max(floor, this.precision / alpha);
+    return this.precision;
+  }
+
+  /** ⭐ 一轮：有测量则刷新，无测量则衰减 */
+  tickPrecision(measured, { alpha = 2.0, floor = 0.05, refreshTo = null } = {}) {
+    return measured ? this.setPrecision(refreshTo) : this.decayPrecision(alpha, floor);
   }
 
   /** 当前 μ 向量 */
