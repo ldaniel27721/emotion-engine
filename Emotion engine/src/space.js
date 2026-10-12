@@ -132,4 +132,4 @@ class Space {
   }
 }
 
-module.exports = { V, Space, cap, capInverse, chi2_3_cdf };
+module.exports = { V, Space, cap, capInverse, chi2_3_cdf, defaultR0 };
