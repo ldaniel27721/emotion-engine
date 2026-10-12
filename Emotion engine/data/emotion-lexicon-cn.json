@@ -1,0 +1,9127 @@
+{
+ "name": "中文情绪词库（离线查表用）",
+ "purpose": "给大肥鱼的情绪模型提供【词 → 释义 + 主题 + 方向约束】的离线查询表；运行时查表，不实时解析",
+ "architecture": {
+  "themeAxis": "主题轴 —— 这个词讲的是什么场景/对象（设定者 2026-10-10 给的 19 类骨架）",
+  "directionAxis": "方向轴 —— 这个情绪往哪走（12 类，来自 Emotion-Feelings 体系）",
+  "octant": "方向的具体取值（Mehrabian 八型 → A1 球体方向）",
+  "note": "两轴正交：一个词同时有主题和方向"
+ },
+ "sources": {
+  "theme": "persona/reference/情绪词汇表.md（设定者提供，605 词 / 19 类）",
+  "direction": "Emotion-Feelings (tomdrummond.com) 10 类 + Calm（补第 12 类）",
+  "octant": "Mehrabian 八型 → 球体方向（A1/A2/A3）",
+  "reference": "R&M 1977 Table 4（151 词 PAD 实测）"
+ },
+ "built": "2026-10-11",
+ "total": 599,
+ "categories": [
+  "Happiness",
+  "Caring",
+  "Depression",
+  "Inadequate",
+  "Fear",
+  "Confusion",
+  "Hurt",
+  "Anger",
+  "Loneliness",
+  "Remorse",
+  "Contempt",
+  "Calm"
+ ],
+ "categoryToOctant": {
+  "Happiness": "Exuberant",
+  "Caring": "Dependent",
+  "Depression": "Bored",
+  "Inadequate": "Bored",
+  "Fear": "Anxious",
+  "Confusion": "Anxious",
+  "Hurt": "Anxious",
+  "Anger": "Hostile",
+  "Loneliness": "Bored",
+  "Remorse": "Anxious",
+  "Contempt": "Disdainful",
+  "Calm": "Relaxed"
+ },
+ "octantSign": {
+  "Exuberant": [
+   1,
+   1,
+   1
+  ],
+  "Dependent": [
+   1,
+   1,
+   -1
+  ],
+  "Relaxed": [
+   1,
+   -1,
+   1
+  ],
+  "Docile": [
+   1,
+   -1,
+   -1
+  ],
+  "Hostile": [
+   -1,
+   1,
+   1
+  ],
+  "Anxious": [
+   -1,
+   1,
+   -1
+  ],
+  "Disdainful": [
+   -1,
+   -1,
+   1
+  ],
+  "Bored": [
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "counts": {
+  "byTheme": {
+   "快乐（Joy）": 50,
+   "悲伤（Sadness）": 60,
+   "愤怒（Anger）": 55,
+   "恐惧（Fear）": 43,
+   "惊讶（Surprise）": 19,
+   "厌恶（Disgust）": 25,
+   "自我评价类": 75,
+   "人际互动类": 8,
+   "目标相关情绪": 25,
+   "爱与联结": 42,
+   "平静与满足": 37,
+   "动力与希望": 23,
+   "焦虑与压力": 34,
+   "孤独与疏离": 17,
+   "无力与绝望": 60,
+   "社交场景": 12,
+   "生理反应": 14
+  },
+  "byCategory": {
+   "Happiness": 111,
+   "Caring": 61,
+   "Calm": 42,
+   "Depression": 88,
+   "Loneliness": 26,
+   "Remorse": 43,
+   "Hurt": 10,
+   "Anger": 62,
+   "Fear": 67,
+   "Confusion": 53,
+   "Contempt": 19,
+   "Inadequate": 17
+  },
+  "byOctant": {
+   "Exuberant": 111,
+   "Dependent": 61,
+   "Relaxed": 42,
+   "Bored": 131,
+   "Anxious": 173,
+   "Hostile": 62,
+   "Disdainful": 19
+  },
+  "byKind": {
+   "emotion": 560,
+   "perception": 39
+  },
+  "byIntensity": {
+   "mild": 515,
+   "strong": 84
+  }
+ },
+ "entries": [
+  {
+   "word": "喜悦",
+   "gloss20": "愉快;高兴",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "欢欣",
+   "gloss20": "欢喜，心情愉快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愉悦",
+   "gloss20": "喜悦",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "畅快",
+   "gloss20": "舒畅、快乐",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "欣喜",
+   "gloss20": "欢喜，快乐",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "满足",
+   "gloss20": "感到已足够而心满意足",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "幸福",
+   "gloss20": "(生活、境遇)称心如意",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "狂喜",
+   "gloss20": "极度高兴",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "陶醉",
+   "gloss20": "沉浸在美好中而忘我",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "雀跃",
+   "gloss20": "高兴得像雀跃起来",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "得意",
+   "gloss20": "称心如意，多指骄傲自满",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "庆幸",
+   "gloss20": "为事情意外有好结局而高兴",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "感恩",
+   "gloss20": "对别人的恩惠心存感激",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "欣慰",
+   "gloss20": "喜欢而心安",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "温暖",
+   "gloss20": "感到亲切关怀而心里暖和",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自豪",
+   "gloss20": "因自己或有关集体取得成就而光荣",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "轻快",
+   "gloss20": "轻松愉快，不费力",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "振奋",
+   "gloss20": "精神振作奋发",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "活力",
+   "gloss20": "精力旺盛，生气勃勃",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "好受",
+   "gloss20": "感到心身愉快;舒服",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "快活",
+   "gloss20": "快乐",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "快乐",
+   "gloss20": "感到幸福或满意",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "舒畅",
+   "gloss20": "开朗愉快;舒服痛快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "舒服",
+   "gloss20": "精神上感到轻松愉快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "舒坦",
+   "gloss20": "精神上感到轻松愉快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "爽快",
+   "gloss20": "舒适痛快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "甜美",
+   "gloss20": "愉快、舒服",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "甜蜜",
+   "gloss20": "形容感到幸福、愉快、舒适",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "甜丝丝",
+   "gloss20": "形容感到幸福、愉快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "喜出望外",
+   "gloss20": "遇意外喜事而特别高兴",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "喜滋滋",
+   "gloss20": "形容内心很欢喜",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心旷神怡",
+   "gloss20": "心情舒畅，精神愉快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "幸灾乐祸",
+   "gloss20": "别人遭灾祸时心里高兴",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愉快",
+   "gloss20": "快意;舒畅",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "不快",
+   "gloss20": "心情不愉快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "不爽",
+   "gloss20": "心情不爽快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惊喜",
+   "gloss20": "惊和喜",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "欢畅",
+   "gloss20": "高兴、痛快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "欢快",
+   "gloss20": "欢乐、轻快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "欢喜",
+   "gloss20": "快乐、高兴",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "可喜",
+   "gloss20": "令人高兴，值得欣喜",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "快意",
+   "gloss20": "心情爽快舒适",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "宽畅",
+   "gloss20": "心里舒畅",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "舒心",
+   "gloss20": "心情舒展;适意",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怡然",
+   "gloss20": "形容喜悦",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心悦诚服",
+   "gloss20": "诚心诚意地服从或佩服",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悦服",
+   "gloss20": "从心里佩服",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "快慰",
+   "gloss20": "痛快而心里感到安慰",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "清爽",
+   "gloss20": "轻松爽快",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "欣幸",
+   "gloss20": "欢喜而庆幸",
+   "theme": "快乐（Joy）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心碎",
+   "gloss20": "极度悲伤，像心被打破",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "忧郁",
+   "gloss20": "愁闷",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "失落",
+   "gloss20": "因失去或不如意而空虚难过",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "沮丧",
+   "gloss20": "灰心失望",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "绝望",
+   "gloss20": "毫无希望，看不到出路",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "孤独",
+   "gloss20": "独自一人，无人相伴",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "寂寞",
+   "gloss20": "孤单冷清",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "空虚",
+   "gloss20": "内心空落，没有寄托",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "消沉",
+   "gloss20": "情绪低落",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "痛心",
+   "gloss20": "极端伤心",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "遗憾",
+   "gloss20": "对未能如愿的事感到惋惜",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惆怅",
+   "gloss20": "伤感失意",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "凄凉",
+   "gloss20": "寂寞冷落，悲伤惨淡",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无助",
+   "gloss20": "没有人帮助，感到无能为力",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "抑郁",
+   "gloss20": "心情低沉，郁结不乐",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "麻木",
+   "gloss20": "感觉迟钝，没有反应",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "黯然",
+   "gloss20": "神情沮丧，心情低落",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悲恸",
+   "gloss20": "非常悲哀，痛哭流涕",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "悲哀",
+   "gloss20": "伤心",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悲伤",
+   "gloss20": "伤心难过",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "沉痛",
+   "gloss20": "深深的悲痛",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "伤感",
+   "gloss20": "因感触而悲伤",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "伤心",
+   "gloss20": "因不幸或不如意而痛苦",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "痛苦",
+   "gloss20": "身体或精神感到非常难受",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "惨然",
+   "gloss20": "形容心里悲惨",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心酸",
+   "gloss20": "心里悲痛",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "悲观",
+   "gloss20": "精神颓丧，对事物发展缺乏信心",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "失落感",
+   "gloss20": "与遗失、丢失相关的感觉",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "苦闷",
+   "gloss20": "苦恼烦闷",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "苦恼",
+   "gloss20": "痛苦烦恼",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忧伤",
+   "gloss20": "忧愁悲伤",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悲苦",
+   "gloss20": "悲哀痛苦",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悲酸",
+   "gloss20": "悲痛辛酸",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悲辛",
+   "gloss20": "悲痛辛酸",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "哀伤",
+   "gloss20": "悲伤",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "哀戚",
+   "gloss20": "悲伤",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "哀痛",
+   "gloss20": "悲伤、悲痛",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "悲怆",
+   "gloss20": "伤心难过",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惨苦",
+   "gloss20": "凄惨痛苦",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "苦涩",
+   "gloss20": "形容内心痛苦",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "凄惨",
+   "gloss20": "凄凉悲惨",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "伤神",
+   "gloss20": "伤心",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "酸楚",
+   "gloss20": "辛酸苦楚",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "痛心疾首",
+   "gloss20": "形容痛恨到极点",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "辛酸",
+   "gloss20": "辣和酸，比喻痛苦悲伤",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "痛恨",
+   "gloss20": "深切地憎恨",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "痛恶",
+   "gloss20": "极端厌恶",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "阴郁",
+   "gloss20": "忧郁，不开朗",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "痛悔",
+   "gloss20": "深切地后悔",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "哀怜",
+   "gloss20": "对别人的不幸遭遇表示同情",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "痛惜",
+   "gloss20": "深痛的惋惜",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "抱憾",
+   "gloss20": "心中存有遗憾的事",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惘然",
+   "gloss20": "失意的样子；心里象失掉了什么",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "哀思",
+   "gloss20": "悲哀思念的感情",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "哀怨",
+   "gloss20": "因委屈而悲伤怨恨",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "悲愤",
+   "gloss20": "悲痛愤怒",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悲郁",
+   "gloss20": "悲伤忧郁",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怅惘",
+   "gloss20": "惆怅迷惘，没精打采",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愁苦",
+   "gloss20": "忧愁苦恼",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愧痛",
+   "gloss20": "因羞愧而感到痛苦",
+   "theme": "悲伤（Sadness）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恼火",
+   "gloss20": "生气",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "暴怒",
+   "gloss20": "突然猛烈地发怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "愤恨",
+   "gloss20": "愤慨痛恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "敌意",
+   "gloss20": "仇视的心理",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "烦躁",
+   "gloss20": "烦闷急躁",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怨恨",
+   "gloss20": "对人或事强烈不满憎恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "气恼",
+   "gloss20": "生气、恼怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愤慨",
+   "gloss20": "气愤不平",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "暴躁",
+   "gloss20": "急躁易怒，不能自控",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "抓狂",
+   "gloss20": "气恼得难以忍受，近于发疯",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "不满",
+   "gloss20": "不满意，心中不平",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "妒火",
+   "gloss20": "强烈的嫉妒之心",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "焦躁",
+   "gloss20": "着急而烦躁",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "挑衅",
+   "gloss20": "故意挑起争端，使人恼怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "憎恶",
+   "gloss20": "憎恨;厌恶",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "反感",
+   "gloss20": "反对或不满的情绪",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "震怒",
+   "gloss20": "异常愤怒，大怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "仇视",
+   "gloss20": "当作仇敌一样看待憎恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "厌烦",
+   "gloss20": "嫌麻烦而讨厌",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "激愤",
+   "gloss20": "激动而愤怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心花怒放",
+   "gloss20": "形容高兴极了",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "愤怒",
+   "gloss20": "生气(激动到极点)",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "气愤",
+   "gloss20": "生气;愤恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "仇恨",
+   "gloss20": "因利益矛盾产生的强烈憎恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "敌视",
+   "gloss20": "当作敌人看待;仇视",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "妒忌",
+   "gloss20": "对比自己好的人心怀怨恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "可恨",
+   "gloss20": "令人痛恨，使人憎恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "憎恨",
+   "gloss20": "厌恶痛恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "窝火",
+   "gloss20": "有委屈或烦恼而不能发泄",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "解气",
+   "gloss20": "消除心中的气愤",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恼羞成怒",
+   "gloss20": "由于羞愧怨恨而发怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "气馁",
+   "gloss20": "失去勇气",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "丧气",
+   "gloss20": "因事情不顺而情绪低落",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "扬眉吐气",
+   "gloss20": "被压抑的心情舒展而快活",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "消气",
+   "gloss20": "平息怒气",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愤激",
+   "gloss20": "愤怒而激动",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恼怒",
+   "gloss20": "生气，发怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "盛怒",
+   "gloss20": "大怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "抱恨",
+   "gloss20": "心中存有恨事",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "嫌怨",
+   "gloss20": "怨恨;对人不满的情绪",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "憋气",
+   "gloss20": "窝火",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愧恨",
+   "gloss20": "因羞愧而自恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悔恨",
+   "gloss20": "懊悔",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自怨自艾",
+   "gloss20": "指悔恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怅恨",
+   "gloss20": "惆怅、恼恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "仇怨",
+   "gloss20": "仇恨、怨恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "感愤",
+   "gloss20": "有所感触而愤慨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恼恨",
+   "gloss20": "生气和怨恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恼人",
+   "gloss20": "令人感觉焦急烦恼",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "衔恨",
+   "gloss20": "心中怀着怨恨或悔恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "羞愤",
+   "gloss20": "羞愧和愤怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忧愤",
+   "gloss20": "忧闷愤慨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怨愤",
+   "gloss20": "怨恨愤怒",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "解恨",
+   "gloss20": "消除心中的愤恨",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "吐气",
+   "gloss20": "发泄胸中委屈怨恨而痛快",
+   "theme": "愤怒（Anger）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "胆怯",
+   "gloss20": "胆小;畏缩",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惊恐",
+   "gloss20": "惊慌恐惧",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "焦虑",
+   "gloss20": "着急忧虑",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "畏惧",
+   "gloss20": "害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恐慌",
+   "gloss20": "由于担心害怕而慌张",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "不安",
+   "gloss20": "心里不踏实，感到忧虑",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "紧张",
+   "gloss20": "精神高度准备，兴奋不安",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "慌乱",
+   "gloss20": "惊慌失措，心绪纷乱",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忧虑",
+   "gloss20": "忧愁担心",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忌惮",
+   "gloss20": "有所畏惧而不敢妄为",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "战栗",
+   "gloss20": "因恐惧而发抖",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惊骇",
+   "gloss20": "非常惊恐害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "惶惑",
+   "gloss20": "因不了解情况而害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心悸",
+   "gloss20": "心里害怕，心跳不安",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "畏缩",
+   "gloss20": "害怕后退，不敢向前",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "悚然",
+   "gloss20": "害怕的样子，感到恐惧",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "疑惧",
+   "gloss20": "疑虑而恐惧",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忐忑",
+   "gloss20": "心神不定，心里七上八下",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惊吓",
+   "gloss20": "因意外的刺激而害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "胆战心惊",
+   "gloss20": "形容非常害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "发憷",
+   "gloss20": "胆怯;畏缩",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "害怕",
+   "gloss20": "遇困难危险而心中不安发慌",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恐怖",
+   "gloss20": "生命受威胁引起的恐惧",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恐惧",
+   "gloss20": "惧怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "受惊",
+   "gloss20": "受突然刺激或威胁而害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "发慌",
+   "gloss20": "因害怕着急或虚弱心神不安",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怕羞",
+   "gloss20": "怕难为情;害臊",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "吃惊",
+   "gloss20": "受惊",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "惊讶",
+   "gloss20": "惊奇诧异",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "警惕",
+   "gloss20": "对可能的危险或错误保持敏锐",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "羞怯",
+   "gloss20": "羞涩胆怯",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "诚惶诚恐",
+   "gloss20": "惊恐不安",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惶惶",
+   "gloss20": "恐惧不安",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惧怕",
+   "gloss20": "害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "畏怯",
+   "gloss20": "胆小害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心惊胆战",
+   "gloss20": "形容非常害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "心惊肉跳",
+   "gloss20": "担心祸患临头，非常害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "惊诧",
+   "gloss20": "惊讶诧异",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "戒惧",
+   "gloss20": "警惕而畏惧",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惊疑",
+   "gloss20": "惊讶疑惑",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "敬畏",
+   "gloss20": "又敬重又害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "危惧",
+   "gloss20": "担心害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忧惧",
+   "gloss20": "忧虑害怕",
+   "theme": "恐惧（Fear）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "震惊",
+   "gloss20": "大吃一惊",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "愕然",
+   "gloss20": "形容吃惊",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "诧异",
+   "gloss20": "觉得十分奇怪",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "错愕",
+   "gloss20": "仓促惊讶，一时发愣",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "意外",
+   "gloss20": "没想到，出乎预料",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惊奇",
+   "gloss20": "感到奇怪而惊讶",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "瞠目",
+   "gloss20": "瞪着眼睛发愣，形容惊呆",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恍然",
+   "gloss20": "猛然醒悟的样子",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "恍悟",
+   "gloss20": "忽然领悟明白过来",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "愣住",
+   "gloss20": "因惊讶而发呆不动",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恍神",
+   "gloss20": "精神不集中，心不在焉",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "骇然",
+   "gloss20": "惊讶恐惧的样子",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "惊异",
+   "gloss20": "惊奇诧异",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惊叹",
+   "gloss20": "惊讶赞叹",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "讶然",
+   "gloss20": "惊讶的样子",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "出乎意料",
+   "gloss20": "事情的结果不在预料之中",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "目瞪口呆",
+   "gloss20": "惊呆得瞪眼说不出话",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "匪夷所思",
+   "gloss20": "不是常理所能想象的",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "猝不及防",
+   "gloss20": "事情突然发生，来不及防备",
+   "theme": "惊讶（Surprise）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恶心",
+   "gloss20": "令人厌恶，想呕吐",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "嫌弃",
+   "gloss20": "厌恶而不愿接近",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "鄙夷",
+   "gloss20": "轻视，看不起",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "作呕",
+   "gloss20": "厌恶得想吐",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "抵触",
+   "gloss20": "因反感而抗拒",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "腻烦",
+   "gloss20": "因过多而厌烦",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "厌弃",
+   "gloss20": "厌恶而嫌弃",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "嫌恶",
+   "gloss20": "厌恶",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "鄙弃",
+   "gloss20": "鄙视厌弃",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "不屑",
+   "gloss20": "轻视，认为不值得",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "厌憎",
+   "gloss20": "厌恶憎恨",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "倒胃口",
+   "gloss20": "扫兴，使人厌恶",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "嗤之以鼻",
+   "gloss20": "用鼻子吭气，表示看不起",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无法忍受",
+   "gloss20": "不能容忍，到了极限",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "可恶",
+   "gloss20": "令人厌恶恼恨",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "厌恶",
+   "gloss20": "对人或事物产生很大反感",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "藐视",
+   "gloss20": "轻视、小看",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "蔑视",
+   "gloss20": "轻视、小看",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "轻视",
+   "gloss20": "不重视，不认真对待",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "厌倦",
+   "gloss20": "对某种活动失去兴趣不愿继续",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "可憎",
+   "gloss20": "可恶",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "嫌隙",
+   "gloss20": "因不满或猜疑而生的恶感",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "嫌憎",
+   "gloss20": "嫌弃厌恶",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "鄙视",
+   "gloss20": "轻视，看不起",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "侮蔑",
+   "gloss20": "轻视、轻蔑",
+   "theme": "厌恶（Disgust）",
+   "themeSection": "一、基础情绪（6大类）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "羞愧",
+   "gloss20": "感到羞耻和惭愧",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "内疚",
+   "gloss20": "内心感觉惭愧不安",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "嫉妒",
+   "gloss20": "对比自己好的人心怀怨恨",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "羡慕",
+   "gloss20": "看到别人好而希望自己也有",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "同情",
+   "gloss20": "对别人的遭遇感到怜惜",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "尴尬",
+   "gloss20": "处境为难，不自然",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自卑",
+   "gloss20": "看轻自己，觉得自己不如人",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "优越感",
+   "gloss20": "自以为比别人优越的意识",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "耻辱",
+   "gloss20": "感到羞耻和名誉受损",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "虚荣",
+   "gloss20": "追求表面光彩和他人赞许",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自满",
+   "gloss20": "满足于自己已有的成绩",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自负",
+   "gloss20": "自以为了不起",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "开心",
+   "gloss20": "心情快乐、舒畅",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心有余悸",
+   "gloss20": "危险过去回想起来仍害怕",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心醉",
+   "gloss20": "因极喜爱而陶醉",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "心烦",
+   "gloss20": "心理烦躁或烦闷",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "担心",
+   "gloss20": "放心不下",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "高傲",
+   "gloss20": "自以为了不起，看不起人",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "狂妄",
+   "gloss20": "极度的自高自大",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "体面",
+   "gloss20": "光荣、光彩",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自大",
+   "gloss20": "自以为了不起",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Contempt",
+   "octant": "Disdainful",
+   "sign": [
+    -1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "抱屈",
+   "gloss20": "因受到委屈心中不舒畅",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "冤枉",
+   "gloss20": "受到不公平待遇，被加不应有罪名",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "心急",
+   "gloss20": "心里急噪",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心急火燎",
+   "gloss20": "心里急得像火烧，非常着急",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "心急如焚",
+   "gloss20": "心里急得像火烧，非常着急",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "心切",
+   "gloss20": "心情急迫",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心慌意乱",
+   "gloss20": "形容心神惊慌忙乱",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惭愧",
+   "gloss20": "因有缺点或做错事未尽责任而不舒畅",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "丢脸",
+   "gloss20": "丢失体面",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "丢人",
+   "gloss20": "丢失体面",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "丢丑",
+   "gloss20": "丢失体面",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "亏心",
+   "gloss20": "感觉自己的言行违背正理",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愧疚",
+   "gloss20": "惭愧不安",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "难堪",
+   "gloss20": "难以忍受，难为情",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "难看",
+   "gloss20": "不光荣，不体面",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "羞耻",
+   "gloss20": "不光彩，不体面",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "羞辱",
+   "gloss20": "耻辱",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "悔悟",
+   "gloss20": "认识自己的过错，悔恨而醒悟",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忏悔",
+   "gloss20": "认识过去的错误或罪过而痛心",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "后悔",
+   "gloss20": "事后悔恨",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "过意不去",
+   "gloss20": "心中不安，抱歉",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "可怜",
+   "gloss20": "值得怜悯",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "可惜",
+   "gloss20": "值得惋惜",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惋惜",
+   "gloss20": "对不幸遭遇或意外变化同情可惜",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心疼",
+   "gloss20": "疼爱;舍不得;惋惜",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "顺心",
+   "gloss20": "合乎心意",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "随心",
+   "gloss20": "合乎自己的心愿，称心",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "圆满",
+   "gloss20": "没有缺乏、漏洞，使人满意",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心寒",
+   "gloss20": "失望而又痛心",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Hurt",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "安心",
+   "gloss20": "心情安定",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "放心",
+   "gloss20": "心情安定，没有忧虑和牵挂",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心安理得",
+   "gloss20": "事情做得合理，对人对己都坦然",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心静",
+   "gloss20": "心里平静",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心灰意懒",
+   "gloss20": "灰心丧气，意志消沉",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "糟心",
+   "gloss20": "因情况坏而心烦",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自惭形秽",
+   "gloss20": "泛指自愧不如别人",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自馁",
+   "gloss20": "失去自信而畏缩",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怏然自足",
+   "gloss20": "形容自大的样子",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自得",
+   "gloss20": "自己感到得意或舒适",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自恃",
+   "gloss20": "过分自信而骄傲自满",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "情急",
+   "gloss20": "希望马上获得或避免而着急",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心焦",
+   "gloss20": "因所盼之事久不实现而急",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "抱愧",
+   "gloss20": "心中有愧",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无地自容",
+   "gloss20": "形容非常羞惭",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "羞人",
+   "gloss20": "感觉难为情或羞耻",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "羞涩",
+   "gloss20": "难为情，态度不自然",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "失悔",
+   "gloss20": "后悔",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "追悔",
+   "gloss20": "追溯以往，感到悔恨",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "歉疚",
+   "gloss20": "对不住别人，对过失感到不安",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "怜悯",
+   "gloss20": "对遭遇不幸的人表示同情",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "遂心",
+   "gloss20": "合自己的心愿;满意",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "激越",
+   "gloss20": "情绪强烈、高亢",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "忘情",
+   "gloss20": "不能节制自己的感情",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "宽心",
+   "gloss20": "解除心中的焦急愁闷",
+   "theme": "自我评价类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "爱恨交织",
+   "gloss20": "爱与恨同时缠绕心头",
+   "theme": "人际互动类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "悲喜交加",
+   "gloss20": "悲伤和喜悦一起来",
+   "theme": "人际互动类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "哭笑不得",
+   "gloss20": "哭也不是，笑也不是",
+   "theme": "人际互动类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "又惊又喜",
+   "gloss20": "又惊讶又高兴",
+   "theme": "人际互动类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "忧喜参半",
+   "gloss20": "忧愁和喜悦各占一半",
+   "theme": "人际互动类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "百感交集",
+   "gloss20": "各种感受同时涌上心头",
+   "theme": "人际互动类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "五味杂陈",
+   "gloss20": "心里各种滋味混杂",
+   "theme": "人际互动类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "欲哭无泪",
+   "gloss20": "想哭却哭不出来，极悲痛",
+   "theme": "人际互动类",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "挫败感",
+   "gloss20": "受挫后觉得自己失败",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "成就感",
+   "gloss20": "因成功而产生的满足",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "期待",
+   "gloss20": "期望、等待",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "失望",
+   "gloss20": "希望落空，感到不如意",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "希望",
+   "gloss20": "心里盼望达到某种目的",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "渴望",
+   "gloss20": "迫切地希望得到",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "渴求",
+   "gloss20": "迫切地追求和盼望",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "急切",
+   "gloss20": "迫切",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "迫切",
+   "gloss20": "需要或愿望十分急切",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "焦急",
+   "gloss20": "着急",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "急不可耐",
+   "gloss20": "急得不能再等",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "如愿以偿",
+   "gloss20": "像所希望的那样得到满足",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怅然若失",
+   "gloss20": "心里不痛快，像丢了什么",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心满意足",
+   "gloss20": "心愿得到满足，非常称心",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "不甘心",
+   "gloss20": "对结果不服气，不肯罢休",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心灰意冷",
+   "gloss20": "灰心丧气，意志消沉",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "如愿",
+   "gloss20": "符合愿望",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "向往",
+   "gloss20": "因热爱羡慕某事物而希望达到",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无望",
+   "gloss20": "没有希望",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "敬慕",
+   "gloss20": "尊敬仰慕",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "渴慕",
+   "gloss20": "非常思慕",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "遂愿",
+   "gloss20": "满足愿望，如愿",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "期求",
+   "gloss20": "希望得到",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "望穿秋水",
+   "gloss20": "形容盼望很切",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "殷切",
+   "gloss20": "深厚而急切",
+   "theme": "目标相关情绪",
+   "themeSection": "二、复合情绪（混合基础情绪）",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "爱慕",
+   "gloss20": "喜爱倾慕，心生向往",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "依恋",
+   "gloss20": "舍不得离开，深深留恋",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "亲密",
+   "gloss20": "关系亲近密切，感情深厚",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "信任",
+   "gloss20": "相信并敢于托付",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "归属感",
+   "gloss20": "感到自己属于某个群体",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "依赖",
+   "gloss20": "离不开某人或某事物",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "倾慕",
+   "gloss20": "倾心爱慕",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "钟情",
+   "gloss20": "感情专注，一心爱慕",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "热恋",
+   "gloss20": "热烈地恋爱着",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "痴迷",
+   "gloss20": "深深迷恋，难以自拔",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "怜惜",
+   "gloss20": "同情爱护",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "疼惜",
+   "gloss20": "心疼爱惜，舍不得",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "关怀",
+   "gloss20": "关心爱护他人",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "体贴",
+   "gloss20": "细心体谅别人的处境",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "牵挂",
+   "gloss20": "挂念",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "宠溺",
+   "gloss20": "过分疼爱娇纵",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "珍惜",
+   "gloss20": "珍重爱惜，不使受损",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "敬爱",
+   "gloss20": "尊敬而且热爱",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "崇拜",
+   "gloss20": "极度尊敬钦佩",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "仰慕",
+   "gloss20": "敬仰思慕",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "不好意思",
+   "gloss20": "害羞",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "敬仰",
+   "gloss20": "尊敬仰慕",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "敬重",
+   "gloss20": "恭敬尊重",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "佩服",
+   "gloss20": "感到可敬可爱;钦佩",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "尊敬",
+   "gloss20": "重视而且恭敬地对待",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "尊重",
+   "gloss20": "尊敬或重视(个人、集体或事物)",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "赞赏",
+   "gloss20": "赞美赏识",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "赞美",
+   "gloss20": "称赞",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "赞叹",
+   "gloss20": "称赞",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "感动",
+   "gloss20": "受外界影响而激动，引起同情向慕",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "怀念",
+   "gloss20": "思念",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "想念",
+   "gloss20": "对离别的人或环境不能忘怀想见",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "崇敬",
+   "gloss20": "推崇尊敬",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "景仰",
+   "gloss20": "佩服尊敬;仰慕",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "钦敬",
+   "gloss20": "敬重佩服",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "尊崇",
+   "gloss20": "尊敬推崇",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "赞佩",
+   "gloss20": "称赞佩服",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "挂念",
+   "gloss20": "因思念而放心不下",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "牵肠挂肚",
+   "gloss20": "形容非常挂念，很不放心",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "眷恋",
+   "gloss20": "对喜爱的人或地方深切怀念",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "贪恋",
+   "gloss20": "十分留恋",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "虔诚",
+   "gloss20": "恭敬而有诚意",
+   "theme": "爱与联结",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "平和",
+   "gloss20": "心情平静温和",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "安宁",
+   "gloss20": "(心情)安定、宁静",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "恬淡",
+   "gloss20": "心境安静，不慕名利",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "释然",
+   "gloss20": "疑虑消除，心里平静",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自在",
+   "gloss20": "安闲舒适",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "轻松",
+   "gloss20": "不感到有负担;不紧张",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惬意",
+   "gloss20": "满意;称心;舒服",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "闲适",
+   "gloss20": "清闲安逸",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "从容",
+   "gloss20": "镇静不慌，不慌不忙",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "超然",
+   "gloss20": "超脱世俗，不为所动",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "淡泊",
+   "gloss20": "不追求名利，恬静寡欲",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "豁达",
+   "gloss20": "心胸开阔，气量宽宏",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "知足",
+   "gloss20": "懂得满足，不贪求",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无忧无虑",
+   "gloss20": "没有一点忧愁和顾虑",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "如释重负",
+   "gloss20": "象放下重担，紧张后的轻松",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心平气和",
+   "gloss20": "心里平和，不急躁，不生气",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "泰然自若",
+   "gloss20": "遇事镇定，神态自然",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "安之若素",
+   "gloss20": "安然对待，像平常一样",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无所适从",
+   "gloss20": "不知道依从谁好，不知怎么办",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "如意",
+   "gloss20": "符合心意",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "安然",
+   "gloss20": "没有顾虑，很放心",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "安详",
+   "gloss20": "从容不迫、稳重",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "安慰",
+   "gloss20": "心情安适",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "宁静",
+   "gloss20": "心情安静",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "塌实",
+   "gloss20": "情绪安定、安稳",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "踏实",
+   "gloss20": "情绪安定、安稳",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "坦然",
+   "gloss20": "形容心里平静，无顾虑",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "镇定",
+   "gloss20": "遇到紧急情况不慌乱",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "镇静",
+   "gloss20": "情绪稳定或平静",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "放松",
+   "gloss20": "对事物的注意或控制由紧变松",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "豁朗",
+   "gloss20": "心情开朗",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忐忑不安",
+   "gloss20": "心神不定",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "可人",
+   "gloss20": "可人意;使人满意",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "遂意",
+   "gloss20": "合自己的心愿;满意",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "宜人",
+   "gloss20": "适合人的心意",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "宽慰",
+   "gloss20": "宽解安慰",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "泰然",
+   "gloss20": "形容心情安定",
+   "theme": "平静与满足",
+   "themeSection": "三、积极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "激昂",
+   "gloss20": "情绪激动昂扬",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "热忱",
+   "gloss20": "热情而真诚",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "激情",
+   "gloss20": "强烈而激动的情感",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "憧憬",
+   "gloss20": "向往着美好的未来",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "希冀",
+   "gloss20": "心里抱有希望",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "乐观",
+   "gloss20": "精神愉快，对发展充满信心",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "昂扬",
+   "gloss20": "情绪高涨",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "跃跃欲试",
+   "gloss20": "急切地想试试身手",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "元气满满",
+   "gloss20": "精力充沛，活力十足",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "生机勃勃",
+   "gloss20": "充满生命力和朝气",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "雄心勃勃",
+   "gloss20": "怀有远大的抱负",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "志在必得",
+   "gloss20": "立志一定要得到",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "踌躇满志",
+   "gloss20": "因得意而心满意足",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "信心百倍",
+   "gloss20": "信心非常充足",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "斗志昂扬",
+   "gloss20": "斗争的意志高涨",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "高兴",
+   "gloss20": "愉快而兴奋",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "冲动",
+   "gloss20": "情感特别强烈，理性控制薄弱",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Anger",
+   "octant": "Hostile",
+   "sign": [
+    -1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "鼓舞",
+   "gloss20": "兴奋、振作",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "激动",
+   "gloss20": "感情因受刺激而冲动",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "兴奋",
+   "gloss20": "振奋;激动",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "振作",
+   "gloss20": "使精神旺盛，情绪高涨、奋发",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "扫兴",
+   "gloss20": "遇不愉快事而兴致低落",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "激奋",
+   "gloss20": "激动振奋",
+   "theme": "动力与希望",
+   "themeSection": "三、积极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "焦灼",
+   "gloss20": "非常着急，烦躁不安",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "忧心忡忡",
+   "gloss20": "忧愁不安，心事重重",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "坐立不安",
+   "gloss20": "坐着站着都不安稳",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "心神不宁",
+   "gloss20": "心里慌乱，神志不安",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "如坐针毡",
+   "gloss20": "形容心神不宁",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "惶惶不可终日",
+   "gloss20": "惊恐不安，一天也过不下去",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "提心吊胆",
+   "gloss20": "形容非常担心害怕",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "六神无主",
+   "gloss20": "形容惊慌失措，没有主意",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心乱如麻",
+   "gloss20": "心里烦乱，毫无头绪",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "七上八下",
+   "gloss20": "形容心神不定，慌乱不安",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忧心如焚",
+   "gloss20": "忧愁焦虑得像火烧一样",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "寝食难安",
+   "gloss20": "睡不好吃不下，十分焦虑",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "压力山大",
+   "gloss20": "形容承受的压力极大",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "别扭",
+   "gloss20": "不顺心",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "烦闷",
+   "gloss20": "心情不畅快",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "难受",
+   "gloss20": "心里不痛快",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "担忧",
+   "gloss20": "发愁、忧虑",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "发愁",
+   "gloss20": "因没有主意或办法而愁闷",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "犯愁",
+   "gloss20": "发愁",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "郁闷",
+   "gloss20": "烦闷;不舒畅",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "浮躁",
+   "gloss20": "轻浮、急噪",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "急躁",
+   "gloss20": "遇不顺心事马上激动不安",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "为难",
+   "gloss20": "感到难以应付",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "憋闷",
+   "gloss20": "心中有疑团而感不舒畅",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "涔涔",
+   "gloss20": "形容烦闷",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "烦扰",
+   "gloss20": "因扰乱而心烦",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "愁闷",
+   "gloss20": "忧虑烦闷",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "穷愁",
+   "gloss20": "穷困愁苦",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "殷忧",
+   "gloss20": "深深的忧虑",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "烦乱",
+   "gloss20": "心情烦乱，思绪混乱",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "纷扰",
+   "gloss20": "混乱",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "闷倦",
+   "gloss20": "烦闷厌倦，无精打采",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忧烦",
+   "gloss20": "忧愁烦恼",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忧闷",
+   "gloss20": "忧愁烦闷",
+   "theme": "焦虑与压力",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "孤寂",
+   "gloss20": "孤独寂寞",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "落寞",
+   "gloss20": "寂寞而失落冷清",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "形单影只",
+   "gloss20": "形容孤单一人，无伴无依",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "茕茕孑立",
+   "gloss20": "形容孤孤单单，无依无靠",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "被冷落",
+   "gloss20": "受到冷淡对待，被忽视",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "格格不入",
+   "gloss20": "彼此不相容，难以融合",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "疏远",
+   "gloss20": "关系冷淡，彼此不亲近",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "隔阂",
+   "gloss20": "彼此情意不通，有距离",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "孤立无援",
+   "gloss20": "处境孤单，得不到援助",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "被排斥",
+   "gloss20": "受到排挤，不被接纳",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "被遗忘",
+   "gloss20": "被忽略，无人记起",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "形影相吊",
+   "gloss20": "形容孤独无依，只有身影相伴",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "顾影自怜",
+   "gloss20": "望着身影，独自怜惜自己",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "孑然一身",
+   "gloss20": "孤零零一个人",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无人问津",
+   "gloss20": "无人过问，无人理睬",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "孤单",
+   "gloss20": "孤独",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "孤立",
+   "gloss20": "不能得到同情或援助",
+   "theme": "孤独与疏离",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "颓丧",
+   "gloss20": "情绪低落，精神委靡",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "萎靡",
+   "gloss20": "精神不振，意志消沉",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "萎顿",
+   "gloss20": "精神疲惫，不振作",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "萎靡不振",
+   "gloss20": "精神颓丧，提不起劲",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "一蹶不振",
+   "gloss20": "受挫后从此无法振作",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "垂头丧气",
+   "gloss20": "低着头，情绪低落沮丧",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "自暴自弃",
+   "gloss20": "自甘堕落，不求上进",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心死",
+   "gloss20": "内心绝望，不再有期待",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "行尸走肉",
+   "gloss20": "糊里糊涂活着，没有灵魂",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "万念俱灰",
+   "gloss20": "一切念头都破灭，极度绝望",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "心如死灰",
+   "gloss20": "心境枯寂，毫无生趣",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "听天由命",
+   "gloss20": "任凭事态发展，不作努力",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "认命",
+   "gloss20": "承认命运安排，不再抗争",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "放弃",
+   "gloss20": "不再坚持，丢掉原有打算",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "窝囊",
+   "gloss20": "因受委屈而烦闷",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "压抑",
+   "gloss20": "对情感力量加以限制使不流露",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无能感",
+   "gloss20": "觉得自己没有能力",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "低沉",
+   "gloss20": "情绪低落",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "沉甸甸",
+   "gloss20": "形容沉重",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "沉郁",
+   "gloss20": "低沉郁闷",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "失意",
+   "gloss20": "不得志",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "懊丧",
+   "gloss20": "事不如意而情绪低落",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "落魄",
+   "gloss20": "潦倒失意",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "颓废",
+   "gloss20": "意志消沉，精神委靡",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "颓靡",
+   "gloss20": "颓丧，不振作",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "颓唐",
+   "gloss20": "精神委靡",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "委靡",
+   "gloss20": "精神不振，意志消沉",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "好奇",
+   "gloss20": "对不了解的事物觉得新奇感兴趣",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "困惑",
+   "gloss20": "感觉疑难，不知道怎么办",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "茫然",
+   "gloss20": "神情迷茫，不知所措",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "冷静",
+   "gloss20": "沉着而不感情用事",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "专注",
+   "gloss20": "心神集中，全神贯注",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "漠然",
+   "gloss20": "不关心不在意的样子",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "淡漠",
+   "gloss20": "没有热情、冷淡",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无动于衷",
+   "gloss20": "心里一点不受感动",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "旁观",
+   "gloss20": "从旁观察，不参与其中",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "中立",
+   "gloss20": "不偏袒任何一方",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无所谓",
+   "gloss20": "不在乎，认为没关系",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "出神",
+   "gloss20": "因精神专注而发呆",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "游离",
+   "gloss20": "无所归属，飘忽不定",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心不在焉",
+   "gloss20": "心思不在这里，不专注",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "若有所思",
+   "gloss20": "好像在思考着什么",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "心静如水",
+   "gloss20": "内心平静，毫无波澜",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "无欲无求",
+   "gloss20": "没有欲望，也不去追求",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "旁观者清",
+   "gloss20": "局外人看得比当事人清楚",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "入迷",
+   "gloss20": "对人或事物产生难舍爱好",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "着迷",
+   "gloss20": "对人或事物产生难舍爱好",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "入神",
+   "gloss20": "对事物有浓厚兴趣而专注",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Caring",
+   "octant": "Dependent",
+   "sign": [
+    1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "怀疑",
+   "gloss20": "疑惑，不很相信",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "可疑",
+   "gloss20": "值得怀疑",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "迷茫",
+   "gloss20": "迷离恍惚",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "随意",
+   "gloss20": "任凭自己的意思",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "淡然",
+   "gloss20": "形容不经心，不在意",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "漠视",
+   "gloss20": "冷淡地对待",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Loneliness",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "迷惑",
+   "gloss20": "辩不清是非，摸不着头脑",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "迷惘",
+   "gloss20": "分辨不清而不知怎么办",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "彷徨",
+   "gloss20": "忧郁不决，不知往哪个方向去",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Confusion",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "疑忌",
+   "gloss20": "因怀疑别人而生猜忌",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "疑虑",
+   "gloss20": "因怀疑而顾虑",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "索然无味",
+   "gloss20": "没有意味，没有兴趣的样子",
+   "theme": "无力与绝望",
+   "themeSection": "四、消极情绪",
+   "category": "Depression",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "害羞",
+   "gloss20": "因胆怯或怕人耻笑而不安，难为情",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "局促",
+   "gloss20": "拘束不自然，感到不安",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "难为情",
+   "gloss20": "害羞，觉得不好意思",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "受宠若惊",
+   "gloss20": "受过分的宠爱而感到意外的惊喜",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "perception",
+   "intensity": "strong"
+  },
+  {
+   "word": "面红耳赤",
+   "gloss20": "脸和耳朵都红了，形容害羞",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "手足无措",
+   "gloss20": "慌乱得不知怎么办才好",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "哑口无言",
+   "gloss20": "理屈词穷，说不出话来",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "哑然失笑",
+   "gloss20": "忍不住笑出声来",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "羞赧",
+   "gloss20": "害羞脸红，难为情",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "腼腆",
+   "gloss20": "害羞，不自然",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "扭捏",
+   "gloss20": "言谈举止不大方，不自然",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "忸怩",
+   "gloss20": "羞愧不安，扭捏不自然",
+   "theme": "社交场景",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Remorse",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "mild"
+  },
+  {
+   "word": "饥饿感",
+   "gloss20": "腹中空虚，想吃东西的感觉",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "饱足感",
+   "gloss20": "吃饱后满足的感觉",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "疲惫感",
+   "gloss20": "身体劳累，感到乏力的感觉",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "strong"
+  },
+  {
+   "word": "倦怠",
+   "gloss20": "疲乏懈怠，没有精神",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "昏昏欲睡",
+   "gloss20": "困倦得快要睡着",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Calm",
+   "octant": "Relaxed",
+   "sign": [
+    1,
+    -1,
+    1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "亢奋",
+   "gloss20": "极度兴奋",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "躁动",
+   "gloss20": "急躁不安，静不下来",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Fear",
+   "octant": "Anxious",
+   "sign": [
+    -1,
+    1,
+    -1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  },
+  {
+   "word": "头晕目眩",
+   "gloss20": "头脑发晕，眼睛昏花",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "恶心反胃",
+   "gloss20": "胃里翻腾，想呕吐",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "疼痛难忍",
+   "gloss20": "疼得难以忍受",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "strong"
+  },
+  {
+   "word": "饥渴难耐",
+   "gloss20": "又饿又渴，难以忍受",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "strong"
+  },
+  {
+   "word": "筋疲力尽",
+   "gloss20": "形容非常疲劳，没有力气",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Inadequate",
+   "octant": "Bored",
+   "sign": [
+    -1,
+    -1,
+    -1
+   ],
+   "kind": "perception",
+   "intensity": "strong"
+  },
+  {
+   "word": "神清气爽",
+   "gloss20": "形容头脑清醒，精神爽快",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "perception",
+   "intensity": "mild"
+  },
+  {
+   "word": "酣畅淋漓",
+   "gloss20": "形容非常畅快、尽兴",
+   "theme": "生理反应",
+   "themeSection": "六、情境与生理相关情绪",
+   "category": "Happiness",
+   "octant": "Exuberant",
+   "sign": [
+    1,
+    1,
+    1
+   ],
+   "kind": "emotion",
+   "intensity": "strong"
+  }
+ ]
+}
