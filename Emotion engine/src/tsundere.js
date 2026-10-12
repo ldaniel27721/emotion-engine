@@ -82,21 +82,40 @@ const SUBTYPE = {
 // ────────────────────────────────────────────────
 // ⭐ 情境影响（改变 s）
 //
-// ⚠️ 分两类（2026-10-12 修正）：
+// ⚠️ 分三类（2026-10-12 修正）：
 //   · state 状态类：描述"现在是什么场合"—— 【设定】而非累加
 //        audience（有观众）/ alone（两人独处）
 //     依据 wiki 逐字："acting all lovey-dovey when alone … when people are
 //     watching they treat them coldly" ⇒ 这是场合切换，不是可叠加的事件
 //   · event 事件类：描述"刚刚发生了什么"—— 【一次性偏移】，然后按疲劳衰减
 //        calledOut / flustered / impulse / intimacy
+//   · ⭐ attachment 对象类：描述"当前互动对象有多重要"—— 【连续量】
+//        objectAttachment ∈ [0,1]
 //
-//   s = clamp( s₀ + 状态偏移 + 事件累积 + 疲劳 )
+// ⭐⭐⭐ 2026-10-12 设定者裁定（覆盖 wiki 的限制）：
+//   「傲娇对象并非恋爱对象，它是一种【人格特质】，
+//     是一个对【人、事、物】的【反馈路径】」
+//
+//   ⇒ 故本层【不】把"对象特定"绑定到恋爱关系，而是抽象为【在意程度】：
+//        越在意 → 越怕被看穿 → s 越低（抑制越强）
+//        不在意 → 无所谓   → s 越高（不抑制）
+//
+//   ⭐ 这条反而解释了 wiki 的观察（"只对喜欢的人冷"），
+//      而不需要"恋爱"这个额外假设 —— 它只是"在意程度"的一个特例。
+//
+//   s = clamp( s₀ + 状态偏移 + 事件累积 + 对象偏移 + 疲劳 )
 // ────────────────────────────────────────────────
 const TRIGGER = {
   /** ⭐ 状态：有观众在场 → 抑制增强（s 降低） */
   audience:      { kind: 'state', dS: -0.40, desc: '有他人在场' },
-  /** ⭐ 状态：两人独处 → 抑制解除（s 升高） */
-  alone:         { kind: 'state', dS: +0.55, desc: '只有两人独处' },
+  /** ⭐ 状态：两人独处 → 抑制解除（s 升高）—— 对象在场且无观众 */
+  alone:         { kind: 'state', dS: +0.55, desc: '只有两人独处（对象在场）' },
+  /** ⭐ 状态：无人在场（对象可能也不在）→ 抑制【轻度】解除
+   *   与 alone 的区别：alone 暗示"对象在场所以可以放心"，
+   *   unobserved 只是"没人看着"，不暗示对象在场。
+   *   ⚠️ 2026-10-12 加：桑多涅在"无人的庭园"（哥伦比娅失踪、无人在场）
+   *   若按 alone 计会把 s 拉回中等，与文本的极强抑制不符。 */
+  unobserved:    { kind: 'state', dS: +0.25, desc: '无人在场（对象也不在）' },
   /** ⭐ 事件：被戳中 → 抑制失效 —— 设定者的核心机制 */
   calledOut:     { kind: 'event', dS: +0.45, desc: '用户点到了心坎子上' },
   /** 事件：害羞/难为情 → 抑制增强 */
@@ -135,13 +154,31 @@ class Tsundere {
   reset() {
     this.s = this.s0;          // 当前抑制强度（含状态与事件偏移）
     this.fatigue = 0;          // 积累的疲劳（抑制维持的代价）
-    this.state = { audience: false, alone: false };  // ⭐ 情境状态
+    this.state = { audience: false, alone: false, unobserved: false };  // ⭐ 情境状态
     this.eventOffset = 0;      // ⭐ 事件偏移的累积（按疲劳衰减）
+    this.attachment = 0;       // ⭐ 对当前互动对象的在意程度 ∈ [0,1]
+    this.attachmentGain = 0.35;// ⭐ 在意程度对抑制的权重
     this.history = [];
   }
 
   /**
-   * ⭐ 重算 s = clamp(s₀ + 状态偏移 + 事件累积 + 疲劳)
+   * ⭐⭐⭐ 设定对当前互动对象的在意程度（2026-10-12 设定者裁定）
+   *
+   * 「傲娇对象并非恋爱对象，它是一种人格特质，是一个对人事物的反馈路径」
+   *
+   * ⇒ 把"对象特定"抽象为【在意程度】：
+   *      越在意 → 越怕被看穿 → s 越低（抑制越强）
+   *      不在意 → 无所谓     → s 越高（不抑制）
+   *
+   * @param {number} v  ∈ [0,1]  0 = 不在意（路人），1 = 极在意（最重要的人）
+   */
+  setAttachment(v) {
+    this.attachment = Math.min(1, Math.max(0, v));
+    return this._recalc();
+  }
+
+  /**
+   * ⭐ 重算 s = clamp(s₀ + 状态偏移 + 事件累积 + 对象偏移 + 疲劳)
    */
   _recalc() {
     let s = this.s0;
@@ -149,6 +186,8 @@ class Tsundere {
       if (on && TRIGGER[k]) s += TRIGGER[k].dS;
     }
     s += this.eventOffset;
+    // ⭐ 对象偏移：在意程度越高，抑制越强（s 越低）
+    s -= this.attachmentGain * this.attachment;
     s += this.fatigue * 0.30;
     this.s = Math.min(1, Math.max(0, s));
     return this.s;
@@ -166,9 +205,10 @@ class Tsundere {
     if (t.kind === 'state') {
       // ⭐ 幂等：反复应用同一状态不会叠加
       this.state[triggerName] = true;
-      // 状态互斥：有观众 与 独处 不能同时成立
-      if (triggerName === 'audience') this.state.alone = false;
-      if (triggerName === 'alone') this.state.audience = false;
+      // 状态互斥：三者只能成立一个
+      for (const k of Object.keys(this.state)) {
+        if (k !== triggerName) this.state[k] = false;
+      }
     } else {
       this.eventOffset = Math.max(-0.6, Math.min(0.6, this.eventOffset + t.dS * strength));
     }
@@ -229,7 +269,8 @@ class Tsundere {
   describe() {
     const st = Object.entries(this.state).filter(([, v]) => v).map(([k]) => k).join('+') || '中性场合';
     return `Tsundere(亚型=[${this.subtypes.join(',')}] s₀=${this.s0} s=${this.s.toFixed(2)} ` +
-      `场合=${st} 事件偏移=${this.eventOffset.toFixed(2)} 疲劳=${this.fatigue.toFixed(2)} ` +
+      `场合=${st} 事件偏移=${this.eventOffset.toFixed(2)} ` +
+      `⭐在意度=${this.attachment.toFixed(2)} 疲劳=${this.fatigue.toFixed(2)} ` +
       `leak=${this.leak.id})`;
   }
 }
