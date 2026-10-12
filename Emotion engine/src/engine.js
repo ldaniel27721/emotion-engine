@@ -52,6 +52,12 @@ class Character {
     this.useLexiconSignature = useLexiconSignature;
 
     this.E = this.mu.vector.slice();   // 初始状态 E₀ = μ（A3 裁定）
+    // ⚠️⚠️ 2026-10-12 修正（Codex 审计）：Dynamics 内部状态默认是 [0,0,0]，
+    //   而 step() 用它起算 ⇒ 必须在这里同步，否则第一轮起点不是 μ。
+    this.dynamics.syncTo(this.E);
+    // ⭐ 心境状态（AET p.18：原因显著 ⇄ 弥散心境）
+    this.moodState = 'emotion';   // 'emotion' | 'mood'
+    this.moodGain = 1.6;          // 弥散心境时的全局增益
     this.turn = 0;
     this.history = [];
   }
@@ -77,8 +83,20 @@ class Character {
 
     // ── ① 评价 ──
     const a = appraisal.aiAppraise(ev.appraisal);
-    const evalCtx = { mu: this.mu.vector, space: this.space, attention: ctx.attention || 1.0 };
+    const evalCtx = {
+      mu: this.mu.vector,
+      space: this.space,
+      attention: ctx.attention || 1.0,
+      // ⭐ 2026-10-12：把 μ 的 precision 接进主循环（原先完全没参与）
+      muPrecision: this.mu.precision,
+    };
     const ar = appraisal.appraisalToDeltaE(a, evalCtx);
+
+    // ⭐ 2026-10-12：心境开关真正生效（原先只返回描述、不改行为）
+    //   AET p.18：原因模糊 ⇒ 弥散心境 ⇒ 全局影响【放大】
+    //             原因显著 ⇒ 具体情绪 ⇒ 全局影响【削弱】
+    const globalGain = this.moodState === 'mood' ? this.moodGain : 1.0;
+    if (globalGain !== 1.0) ar.dE = V.mul(ar.dE, globalGain);
 
     // ── ①′ ⭐ 词库：匹配候选概念（可选增强）──
     let concept = null, candidates = [];
@@ -90,7 +108,9 @@ class Character {
         top: 6,
       });
       concept = candidates[0] || null;
-      // 可选：用选中词的签名替代八型签名（更细的分辨率）
+      // 可选：用选中词的签名替代八型签名
+      // ⚠️ 注意（Codex 审计更正）：词库签名与八型签名【数值同源】，
+      //    这条分支不会提升分辨率；真正的增益是"选词"本身与语义锚。
       if (concept && this.useLexiconSignature) {
         const sig = concept.signature;
         ar.dE = V.mul(sig, V.norm(ar.dE));
@@ -124,6 +144,7 @@ class Character {
       octant: ar.octant,
       alpha: ar.alpha,
       eps: ar.eps,
+      priorStrength: ar.priorStrength,   // ⭐ 2026-10-12：暴露先验强度（precision 的接入痕迹）
       valence: ar.valence,
       intensity: ar.intensity,
       dE: ar.dE,
@@ -169,10 +190,13 @@ class Character {
    * @param {boolean} causeSalient 原因是否显著
    */
   moodSwitch(causeSalient) {
-    // 原因显著 → 弥散心境收敛为具体情绪（全局影响削弱）
+    // ⚠️ 2026-10-12 修正（Codex 审计）：原先只 return 一个描述对象、
+    //   完全不改状态 ⇒ 开关是死的。现改为【真的写状态】，
+    //   并在 step() 里用 this.moodGain 缩放 ΔE。
+    this.moodState = causeSalient ? 'emotion' : 'mood';
     return causeSalient
       ? { state: 'emotion', globalGain: 1.0, desc: '原因显著 → 具体情绪，全局影响被削弱' }
-      : { state: 'mood', globalGain: 1.6, desc: '原因模糊 → 弥散心境，全局影响被放大' };
+      : { state: 'mood', globalGain: this.moodGain, desc: '原因模糊 → 弥散心境，全局影响被放大' };
   }
 
   describe() {

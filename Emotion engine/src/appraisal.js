@@ -139,7 +139,7 @@ function precisionGate(a) {
 //     起点项 = μ（先验）· 漂移项 = 显著度/注意 · 标准项 = 期望
 // ────────────────────────────────────────────────
 function appraisalToDeltaE(a, ctx) {
-  const { mu, space, attention = 1.0 } = ctx;
+  const { mu, space, attention = 1.0, muPrecision = 1.0 } = ctx;
 
   const dir = classifyDirection(a);
   if (!dir.direction) {
@@ -157,8 +157,15 @@ function appraisalToDeltaE(a, ctx) {
   const expectedValence = (a.expectancy - 0.5) * 2;      // [−1,1]
   const eps = Math.abs(prim.valence - expectedValence) * 0.5 + 0.5 * (1 - a.certainty);
 
-  // 起点项：把 ΔE 朝 μ 的反方向/同方向拉 —— 先验的"锚"
-  const priorPull = V.mul(V.unit(mu), 0.15 * (1 - a.certainty));
+  // 起点项：把 ΔE 朝 μ 的方向拉 —— 先验的"锚"
+  //
+  // ⚠️ 2026-10-12 修正（Codex 审计：precision 未接入主循环）：
+  //   topdown2025 说 μ 的 precision 是【知觉层的先验】，
+  //   "先验因不确定性更低而支配知觉"（Box 2, p.393）
+  //   ⇒ precision 越高，模糊事件越是【被读成符合先验】。
+  //   原先这里写死 0.15，precision 完全不参与 ⇒ 现改为按 precision 缩放。
+  const priorStrength = 0.15 * (1 - a.certainty) * (muPrecision / 3);
+  const priorPull = V.mul(V.unit(mu), priorStrength);
 
   // 强度：一级评价的 intensity
   const mag = prim.intensity;
@@ -176,6 +183,7 @@ function appraisalToDeltaE(a, ctx) {
     eps,
     valence: prim.valence,
     intensity: prim.intensity,
+    priorStrength,
     note: dir.note,
   };
 }

@@ -35,13 +35,33 @@ class Dynamics {
     this.reset();
   }
 
-  reset() {
+  /**
+   * ⭐ 重置
+   * @param {number[]} [initial] 初始情绪 —— ⚠️ 必须与 Character.E 一致！
+   *
+   * ⚠️⚠️ 2026-10-12 修正（Codex 审计）：
+   *   原实现把 this.E 硬写成 [0,0,0]，而 Character.E 从 μ 起 ⇒
+   *   两者差 ‖μ‖（默认 0.45），而 step() 用的是 this.E ⇒ 第一轮起点不是 μ，
+   *   直接违反 A3 的裁定「E₀ = μ」。
+   */
+  reset(initial = null) {
     /** @type {number[]} 当前情绪 E（PAD） */
-    this.E = [0, 0, 0];
+    this.E = initial ? initial.slice() : [0, 0, 0];
+    /** 初始值留档，便于外部核对同步性 */
+    this.initial = this.E.slice();
     /** 暴露计数：按"事件类别"记，用于 h(n) */
     this.exposure = new Map();
     /** 事件日志 */
     this.log = [];
+  }
+
+  /**
+   * ⭐ 把内部状态同步到外部给定的 E（Character 构造后调用）
+   */
+  syncTo(E) {
+    this.E = E.slice();
+    this.initial = E.slice();
+    return this.E;
   }
 
   /** 半衰期（轮） */

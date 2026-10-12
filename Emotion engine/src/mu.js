@@ -53,6 +53,9 @@ class Mu {
     this.rMu = n < 1e-9 ? 0 : rMu;
     this.precision = precision;
     this.label = label;
+    // ⭐ 不可变基准（drift 由「基准 + 累计漂移」导出，避免重复吸收）
+    this._baseDir = this.dir.slice();
+    this._baseRmu = this.rMu;
     this._drift = [0, 0, 0];   // 慢漂移累积（#43）
   }
 
@@ -67,22 +70,43 @@ class Mu {
   /**
    * ⭐ 慢漂移（#43「记忆是 μ 的唯一载体」）
    * 依据：barrett2016 "neurons do not lie dormant until stimulated"、μ 应为慢变而非常数
+   *
+   * ⚠️⚠️ 2026-10-12 修正（Codex 审计）：
+   *   原实现每次调用都执行 `dir ← normalize(dir·rMu + _drift)`，
+   *   而 `_drift` 在第一次调用时【已经被吸收进 dir 了】——
+   *   于是第二次起 rate=0 虽然不改 _drift，却把它【又加一遍】：
+   *     实测 dir 从 0.810961 连变到 0.815329（调 4 次），rMu 被顶到上限 0.500。
+   *
+   *   ⭐ 修法：把 (baseDir, baseRmu) 作为【不可变的基准】保存，
+   *     每次由「基准 + 累计漂移」重新导出 dir/rMu。
+   *     ⇒ rate=0 时 _drift 不变 ⇒ 导出结果不变 ⇒ 幂等。
+   *
    * @param {number[]} delta     漂移方向
-   * @param {number}   rate      漂移速率（很小，典型 0.01~0.05）
+   * @param {number}   rate      漂移速率（很小，典型 0.01~0.05）；0 = 不漂
    * @param {number}   maxDrift  漂移上限（防止 μ 跑出球体）
    */
   drift(delta, rate = 0.02, maxDrift = 0.35) {
-    const step = V.mul(V.unit(delta), rate) ;
+    // ⭐ rate=0 直接返回，不做任何重算（幂等）
+    if (!(rate > 0)) return this.vector;
+
+    const step = V.mul(V.unit(delta), rate);
     let next = V.add(this._drift, step);
     const nd = V.norm(next);
     if (nd > maxDrift) next = V.mul(next, maxDrift / nd);
     this._drift = next;
-    // 归一化后重算 dir / rMu（保持 r_μ 在软约束内）
-    const full = V.add(V.mul(this.dir, this.rMu), this._drift);
+
+    // ⭐ 由【不可变基准】+ 累计漂移导出，避免重复吸收
+    const full = V.add(V.mul(this._baseDir, this._baseRmu), this._drift);
     const fn = V.norm(full);
-    if (fn > 1e-9) { this.dir = V.mul(full, 1 / fn); this.rMu = Math.min(0.50, Math.max(0.40, fn)); }
+    if (fn > 1e-9) {
+      this.dir = V.mul(full, 1 / fn);
+      this.rMu = Math.min(0.50, Math.max(0.40, fn));
+    }
     return this.vector;
   }
+
+  /** ⭐ 累计漂移量（供审计/测试） */
+  get driftMagnitude() { return V.norm(this._drift); }
 
   describe() {
     return `μ[${this.label}] dir=${V.fmt(this.dir, 3)} r_μ=${this.rMu.toFixed(2)} ` +
