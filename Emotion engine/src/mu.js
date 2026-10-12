@@ -39,6 +39,24 @@ const PRESETS = {
   disdainful: { dir: [-0.70, -0.50, 0.50], precision: 4.0, label: '轻蔑型' },
 };
 
+/**
+ * ⭐ B8（docs/06）标定值：μ 的漂移速率
+ *
+ * 文献（nihms / Mote et al.）：人类 PA/NA 在 60 天内都不显著漂移（p=0.10 / p=0.84）。
+ * 反解：rate ≤ δ / (60 × N)   N = 每天对话轮数
+ *       取 N=20、δ=0.05（球体半径的 5%）⇒ rate ≤ 4.167e-5
+ *       ⚠️ 圆整必须【向下】：取 4.0e-5。
+ *          （曾误取 4.2e-5 —— 向上圆整会突破上界：4.2e-5 × 1200 = 0.0504 > 0.05）
+ *
+ * ⚠️ 对比：历史上的默认 0.02 会在 17.5 轮（每天 20 轮 ⇒ 0.88 天）就顶到 maxDrift=0.35，
+ *    与「60 天看不出」差两个数量级。0.02 保留仅为向后兼容。
+ *
+ * ⭐ 语义澄清：drift 的输入是【记忆积累量】，不是时间本身 ——
+ *    "60 天看不出"是【平凡情形】（无值得记的事）的标定；
+ *    若发生重大事件，delta 变大，μ 自然可以更快移动。这与 A3「记忆是 μ 的唯一载体」相容。
+ */
+const DRIFT_RATE_CALIBRATED = 4.0e-5;
+
 class Mu {
   /**
    * @param {object} o
@@ -116,8 +134,19 @@ class Mu {
    *     每次由「基准 + 累计漂移」重新导出 dir/rMu。
    *     ⇒ rate=0 时 _drift 不变 ⇒ 导出结果不变 ⇒ 幂等。
    *
+   * ⚠️⚠️ 2026-10-13 标定（docs/06 的 B8）：
+   *   文献（nihms / Mote et al.）：人类 PA/NA 在 60 天内都不显著漂移（p=0.10 / p=0.84）。
+   *   ⭐ 据此反解：要让平凡情形 60 天看不出漂移，
+   *        rate ≤ δ / (60 × N)     N = 每天对话轮数
+   *      取 N=20、δ=0.05（球体半径的 5%）⇒ rate ≤ 4.167e-5
+   *   ⇒ 标定值见 DRIFT_RATE_CALIBRATED。
+   *
+   *   ⚠️ 而本函数历史上的默认 0.02 会在 **17.5 轮**（若每天 20 轮 ⇒ **0.88 天**）
+   *      就把 _drift 顶到 maxDrift=0.35 —— 与「60 天看不出」差两个数量级。
+   *   ⭐ 因此 0.02 保留仅为【向后兼容】，新代码请显式传 DRIFT_RATE_CALIBRATED。
+   *
    * @param {number[]} delta     漂移方向
-   * @param {number}   rate      漂移速率（很小，典型 0.01~0.05）；0 = 不漂
+   * @param {number}   rate      漂移速率；0 = 不漂。⚠️ 默认 0.02 已过时，见上
    * @param {number}   maxDrift  漂移上限（防止 μ 跑出球体）
    */
   drift(delta, rate = 0.02, maxDrift = 0.35) {
@@ -164,4 +193,4 @@ function bayesianRead(priorMean, eventMean, eventNoise, precision) {
   return { posterior: post, shift: post - priorMean };
 }
 
-module.exports = { Mu, PRESETS, bayesianRead };
+module.exports = { Mu, PRESETS, bayesianRead, DRIFT_RATE_CALIBRATED };

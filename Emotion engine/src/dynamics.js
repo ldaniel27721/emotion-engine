@@ -32,6 +32,9 @@ class Dynamics {
     noveltyReset = false,      // B3: h(n) 自动新颖性复位
     noveltyThreshold = 0.35,   // B3: 触发复位的相对阶跃阈值
     rhoByValence = null,       // B1: { neg, mid, posMid, posHigh } 或 null
+    // ⭐ docs/06 的 P2 · B2 情境分段 —— 默认关闭
+    rhoByContext = null,       // B2: { <情境名>: 半衰期倍数 } 或 null
+    context = null,            // B2: 当前情境名（对应 rhoByContext 的键）
   } = {}) {
     this.rho = rho;
     this.alpha = alpha;
@@ -42,7 +45,50 @@ class Dynamics {
     this.noveltyReset = noveltyReset;
     this.noveltyThreshold = noveltyThreshold;
     this.rhoByValence = rhoByValence;
+    // ⭐ B2 开关
+    this.rhoByContext = rhoByContext;
+    this.context = context;
     this.reset();
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // ⭐ B2（docs/06）ρ 按情境分段 —— 默认关闭
+  //
+  //   文献：Wang & Zhang (2025) Appl. Sci. 15:4960 的案例模型
+  //         dE/dt = αS + βG(1−E) − γE
+  //         案例给出：工作日 γ=0.3 ｜ 周末 γ=1  ⇒ 【γ 之比 3.33×】
+  //
+  //   ⚠️ 关键：γ 是【衰减速率】，不是留存率 ρ。两者成反比：
+  //        半衰期 = ln2 / γ  ⇒  γ 之比 = 半衰期之比的倒数
+  //      ⇒ 工作日 γ 小 ⇒ 半衰期长 ⇒ 情绪更持久
+  //
+  //   ⭐ 所以情境参数按【半衰期倍数】给，而不是直接给 ρ：
+  //        ρ_eff = 0.5 ^ (1 / (halfLife_base × k_context))
+  //      k_context = 1.0 为基准；k_context = 3.33 表示半衰期延长 3.33 倍。
+  //      ⇒ 这样"3.33×"这个文献数字落在【它本来描述的量的轴】上。
+  //
+  //   ⚠️ 默认 rhoByContext=null ⇒ 不启用，行为与既有版本一致。
+  // ═══════════════════════════════════════════════════════════
+
+  /** 基准半衰期（轮） */
+  get halfLife() { return Math.log(0.5) / Math.log(this.rho); }
+
+  /** ⭐ B2：切换情境（必须是 rhoByContext 里的键，或 null 表示不生效） */
+  setContext(name) {
+    if (name !== null && this.rhoByContext && !(name in this.rhoByContext)) {
+      throw new Error('unknown context: ' + name + '（可选：' + Object.keys(this.rhoByContext).join(' / ') + '）');
+    }
+    this.context = name;
+    return this.context;
+  }
+
+  /** ⭐ B2：由情境名解出实际使用的 ρ */
+  rhoForContext(name) {
+    if (!this.rhoByContext || !name) return this.rho;
+    const kk = this.rhoByContext[name];
+    if (typeof kk !== 'number' || kk <= 0) return this.rho;
+    const hl = this.halfLife * kk;                 // 半衰期倍数
+    return Math.pow(0.5, 1 / hl);                  // 换回留存率
   }
 
   /**
@@ -76,9 +122,6 @@ class Dynamics {
     return this.E;
   }
 
-  /** 半衰期（轮） */
-  get halfLife() { return Math.log(0.5) / Math.log(this.rho); }
-
   /**
    * ⭐ 推进一轮
    * @param {number[]} dERaw   评价层产出的原始 ΔE
@@ -90,7 +133,7 @@ class Dynamics {
    * @param {boolean}  opts.resetExposure 是否重置该类别的暴露计数
    */
   step(dERaw, mu, opts = {}) {
-    const { eventKey = null, g = 1, h = null, resetExposure = false } = opts;
+    const { eventKey = null, g = 1, h = null, resetExposure = false, context } = opts;
 
     // ═══════════════════════════════════════════════════════════
     // ⭐ B3（docs/06）h(n) 的【自动】新颖性复位 —— 默认关闭
@@ -148,6 +191,21 @@ class Dynamics {
             : this.rhoByValence.mid;   // P 轴 ≈ 0 → 中性档
     }
 
+    // ⭐ B2（docs/06）ρ 按情境分段 —— 默认关闭
+    //   ⭐ 与 B1【复合】：效价定"这类情绪本身多粘"，情境定"这场合衰减多快"
+    //      做法：先取到 rhoBase（效价档或基准），再把它的【半衰期】乘 k_context
+    //   ⚠️ opts.context 优先于 this.context；两者都没给则不生效。
+    const ctxName = opts.context !== undefined ? opts.context : this.context;
+    let rhoContext = null;
+    if (this.rhoByContext && ctxName) {
+      const kk = this.rhoByContext[ctxName];
+      if (typeof kk === 'number' && kk > 0) {
+        const hlBase = Math.log(0.5) / Math.log(rho);
+        rhoContext = Math.pow(0.5, 1 / (hlBase * kk));
+        rho = rhoContext;
+      }
+    }
+
     let next = V.add(mu, V.mul(dev, rho));                // ρ 回落
     const dEff = V.mul(dERaw, g * hn);                    // g·h·ΔE_raw
     next = V.add(next, dEff);
@@ -169,7 +227,9 @@ class Dynamics {
       rRaw,
       dE: dEff.slice(),
       g, h: hn,
-      rho,                       // ⭐ 实际用到的 ρ（便于审计 B1 生效）
+      rho,                       // ⭐ 实际用到的 ρ（便于审计 B1/B2 生效）
+      rhoContext,                // ⭐ B2 情境调整后的 ρ（未启用则为 null）
+      context: ctxName,          // ⭐ 本轮生效的情境名
       noveltyFired,              // ⭐ B3 是否触发复位（便于审计）
       eventKey,
       exposure: eventKey === null ? null : this.exposure.get(eventKey),

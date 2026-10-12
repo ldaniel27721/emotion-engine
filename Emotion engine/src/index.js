@@ -34,6 +34,8 @@ module.exports = {
   Mu: mu.Mu,
   MU_PRESETS: mu.PRESETS,
   bayesianRead: mu.bayesianRead,
+  /** ⭐ B8 标定值：由「60 天看不出漂移」反解出的 μ 漂移速率（见 docs/06） */
+  DRIFT_RATE_CALIBRATED: mu.DRIFT_RATE_CALIBRATED,
 
   // 表达层（傲娇）
   Tsundere: tsundere.Tsundere,
@@ -49,6 +51,6 @@ module.exports = {
   // 组装
   Character: engine.Character,
 
-  /** 版本 */
-  VERSION: '0.1.0-beta',
+  /** 版本 —— ⚠️ 必须与 VERSION 文件同步（此前长期停在 0.1.0-beta，已修正） */
+  VERSION: '0.1.6-beta',
 };
