@@ -5,7 +5,10 @@
 //   node ee.mjs step --file <appraisal.json>   推进一轮（账本追加一行）
 //   node ee.mjs memory [关键词] [--k 4]  只看残余情绪记忆
 //   node ee.mjs ledger                   账本路径与轮次数
+//   node ee.mjs export --out <file>      把账本导成 test/turns 格式 ⇒ 直接喂 test/replay.js 出审查报告
 //   node ee.mjs step --file x.json --mnemon    同时写进 mnemon
+//
+// 可选全局参数：--state-dir <目录>（或环境变量 DSH_EE_STATE_DIR）
 //
 // ⚠️ appraisal 请一律走 --file：本机 PowerShell 的引号会把内联 JSON 吃掉。
 // 这个脚本和插件共用同一个账本目录（~/.dsh/emotion-engine/ledger.jsonl），
@@ -47,6 +50,7 @@ for (let i = 1; i < argv.length; i++) {
   if (a === '--mnemon') { opt.mnemon = true; continue; }
   if (a === '--k') { opt.k = Number(argv[++i]); continue; }
   if (a === '--file') { opt.file = argv[++i]; continue; }
+  if (a === '--out') { opt.out = argv[++i]; continue; }
   if (a === '--state-dir') { opt.stateDir = argv[++i]; continue; }
   if (a === '--engine-root') { opt.engineRoot = argv[++i]; continue; }
   pos.push(a);
@@ -66,6 +70,30 @@ if (cmd === 'state') {
     console.log('· R=' + h.R.toFixed(3) + '  S=' + h.S.toFixed(1) + '  第' + h.turn + '轮  ' + h.summary +
       (h.emotion ? '（' + h.emotion + '）' : ''));
   }
+} else if (cmd === 'export') {
+  // 把账本导出成 test/turns/*.json 的格式 ⇒ 可以直接喂给 test/replay.js 出审查报告
+  const rows = bridge.ledger.read().filter((r) => r && !r.idle && r.appraisal);
+  const out = opt.out || path.join(process.cwd(), 'turns-export.json');
+  const spec = {
+    session: 'ledger-export',
+    channel: 'live',
+    window: (rows[0] ? String(rows[0].at).slice(0, 10) : '') + ' ~ ' + (rows.length ? String(rows[rows.length - 1].at).slice(0, 10) : ''),
+    character: {
+      name: bridge.cfg.name, sigma: bridge.cfg.sigma,
+      muPreset: bridge.cfg.muPreset,
+    },
+    note: '由 ' + bridge.ledger.file + ' 导出（' + rows.length + ' 轮）。appraisal 是每轮由模型直填的真实记录。',
+    turns: rows.map((r) => ({
+      key: r.eventKey || String(r.summary || '').slice(0, 12) || ('t' + r.turn),
+      text: r.text || r.summary || '',
+      triggers: r.triggers || [],
+      strategyScale: r.strategyScale === null || r.strategyScale === undefined ? undefined : r.strategyScale,
+      appraisal: r.appraisal,
+    })),
+  };
+  fs.writeFileSync(out, JSON.stringify(spec, null, 2), 'utf8');
+  console.log('已导出 ' + spec.turns.length + ' 轮 → ' + out);
+  console.log('接着可以跑：node test/replay.js "' + out + '"');
 } else if (cmd === 'ledger') {
   console.log('账本: ' + bridge.ledger.file);
   console.log('轮次: ' + bridge.state().turn + '   记忆条目: ' + bridge.memory.size);
@@ -95,6 +123,6 @@ if (cmd === 'state') {
     console.log(out.ok ? '（已写进 mnemon）' : '（⚠️ mnemon 写入失败：' + out.reason + '）');
   }
 } else {
-  console.error('子命令：state | step | memory | ledger');
+  console.error('子命令：state | step | memory | ledger | export');
   process.exit(2);
 }

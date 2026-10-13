@@ -45,9 +45,26 @@ node scripts/ee.mjs memory 表情包 --k 4
 
 # ④ 账本路径与轮次
 node scripts/ee.mjs ledger
+
+# ⑤ 把账本导成回放格式 —— 跑完一段对话后做审查
+node scripts/ee.mjs export --out turns-export.json
+node test/replay.js turns-export.json        # 在引擎仓库根目录跑，出两张表 + 汇总
 ```
 
 `step` 会把新状态整块打出来 —— **照它说话**，不要直读数值给用户。
+
+## 账本放哪儿（重要）
+
+默认 `~/.dsh/emotion-engine/`（本机 = `C:\Users\Admin\.dsh\emotion-engine\`）。
+要换地方（例如跑在**只允许动工作区**的 IM 机器人里）：
+
+```powershell
+node scripts/ee.mjs state --state-dir 'E:\dsh\emotion-engine'
+$env:DSH_EE_STATE_DIR = 'E:\dsh\emotion-engine'      # 或整体用环境变量
+```
+
+⚠️ 同一个 `stateDir` = 同一条情绪时间线。桌面会话和 IM 机器人**各指一个目录**，
+就是两条独立时间线，互不污染；想让它们是一条线，就指同一个目录。
 
 ## appraisal 怎么写（九项 + 三样）
 
