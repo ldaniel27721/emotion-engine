@@ -3,6 +3,10 @@
 大肥鱼（DeepSeek 拟人化鲸鱼娘）的**人格档案**、情绪动力学理论基座，以及记忆导出管线。
 
 > 私有仓库。人格规格仍在持续细化，落地前不得自行发明对应行为。
+>
+> ⚠️ **公开镜像**：本仓有一份公开副本 [`ldaniel27721/emotion-engine`](https://github.com/ldaniel27721/emotion-engine)，
+> 为**脱敏**版本 —— 不含 `papers/` 原文（只留 [`papers/REFERENCES.md`](./papers/REFERENCES.md) 引用清单）、
+> 不含真实会话记录与人设图，文档中的第三方 openid 已替换为占位符。由 `mirror-public.ps1` 从本仓生成，勿手工改镜像。
 
 ---
 
@@ -11,7 +15,7 @@
 | 路径 | 内容 |
 |---|---|
 | `persona/` | 人格档案主体：主规格、systemPrompt 字段、外形规格、修订追踪、临时工作区、参考料、归档 |
-| `papers/` | 情绪动力学的理论来源（PAD 综述、Gunes & Schuller 2013） |
+| `papers/` | 情绪动力学的理论来源（PAD 综述、Gunes & Schuller 2013…）。⚠️ **原始文献为第三方版权材料**：本仓只登记引用 [`papers/REFERENCES.md`](./papers/REFERENCES.md)（短键 → 完整引用 + 用在哪），公开镜像里连原文也不含 |
 | `scripts/` | 记忆导出与校验脚本（待补） |
 
 ---
