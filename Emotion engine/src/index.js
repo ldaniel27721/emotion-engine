@@ -11,6 +11,7 @@ const dynamics = require('./dynamics');
 const mu = require('./mu');
 const tsundere = require('./tsundere');
 const lexicon = require('./lexicon');
+const memory = require('./memory');
 const engine = require('./engine');
 
 module.exports = {
@@ -48,9 +49,15 @@ module.exports = {
   ConceptPrior: lexicon.ConceptPrior,
   THEME_TO_GOAL: lexicon.THEME_TO_GOAL,
 
+  // ⭐ 情绪记忆（docs/12 · issue #1）
+  //   遗忘曲线 R = exp(−t/S)（SuperMemo / Wozniak 1995）
+  //   情绪强度进 S —— "更容易记住让大肥鱼体验强烈的情绪及其事件"
+  EmotionMemory: memory.EmotionMemory,
+  valenceSign: memory.valenceSign,
+
   // 组装
   Character: engine.Character,
 
   /** 版本 —— ⚠️ 必须与 VERSION 文件同步（此前长期停在 0.1.0-beta，已修正） */
-  VERSION: '0.1.6-beta',
+  VERSION: '0.1.12-beta',
 };
