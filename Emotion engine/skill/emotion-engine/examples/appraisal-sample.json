@@ -1,0 +1,17 @@
+{
+  "summary": "用户点名要表情包，本鱼嘴上嫌弃但还是发了",
+  "emotion": "害羞",
+  "intensity": 0.7,
+  "eventKey": "calledOut",
+  "triggers": ["audience", "calledOut", "flustered"],
+  "senderId": "selfcheck-user",
+  "relevance": 0.8,
+  "congruence": 0.6,
+  "importance": 0.5,
+  "agency": "other",
+  "coping": 0.8,
+  "certainty": 0.7,
+  "expectancy": 0.5,
+  "intentionality": 1.0,
+  "currentArousal": 0.4
+}

@@ -1,0 +1,17 @@
+# dsh-emotion-engine bundle patch
+# 把情绪引擎插件挂进宿主组合。
+#
+# ⚠️ 默认【disabled: true】—— 装完是惰性的，什么都不会发生。
+#    要启用：在 profile 的 patch 里加两行（见 README 的「启用」一节），
+#    并且【必须在另一个会话/终端做】，因为 profile patch 是热加载的。
+- insert:
+    - id: emotion-engine
+      name: 'dsh-emotion-engine'
+      disabled: true
+      # 可选配置（不写就用默认值）：
+      # config:
+      #   stateDir: 'C:\\Users\\Admin\\.dsh\\emotion-engine'
+      #   engineRoot: 'E:\\dsh\\_herta-clone\\Emotion engine'
+      #   character: { name: '傲娇大肥鱼', sigma: 0.5, muPreset: 'dependent' }
+      #   memory: { S0: 30, k: 4, topK: 4, minR: 0.05 }
+      #   mnemon: { enabled: true, blocking: false, dataDir: null, cli: null }

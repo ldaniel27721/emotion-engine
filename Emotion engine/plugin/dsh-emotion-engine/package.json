@@ -1,0 +1,35 @@
+{
+  "name": "dsh-emotion-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "把 Emotion Engine 接进 DSH 会话：每轮注入引擎算出的 E/s/八型，提供 emotion_appraise 回写评价，情绪事件写入 mnemon",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./bridge": "./lib/bridge.js",
+    "./mnemon": "./lib/mnemon.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": "*"
+  },
+  "scripts": {
+    "test": "node --test",
+    "test:integration": "node --test test/mnemon.integration.mjs"
+  },
+  "files": [
+    "lib/",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "license": "MIT"
+}
