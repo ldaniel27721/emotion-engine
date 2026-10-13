@@ -1,108 +1,126 @@
-// ⭐ 情绪记忆（简化版）—— 设定者 2026-10-13 最终规格
+// ⭐ 情绪记忆（修正版）—— 设定者 2026-10-13 第 2 次更正
 //
-// 设定者原话：
-//   「就是模型本身对事件的判断，然后把事件精简成某些提示词或者情绪词录入记忆系统，
-//     打上时间戳或者轮次步数，我们这个记忆系统只需要模型自己去提取关于这个事件的
-//     摘要和情绪就可以了，我们不需要他们那种复杂的系统构造。」
+// ⚠️⚠️ 本鱼此前把它当"记忆系统"，设定者更正：
+//   「这个东西针对的是【情绪的衰减】而不是【记忆的问题】，大肥鱼你要清楚别绕进去了」
 //
-// ⇒ ⭐ 条目只有四样：轮次 / 时间戳 / 摘要 / 情绪词
-//   · 摘要与情绪词【由模型自己提取】—— 本模块不做任何判断
-//   · 没有 S、没有 kEmotion、没有 kRecall、没有 traits、没有复习、没有失败分支
+// ⇒ 它不是"这个事还记得吗"，而是「这个事带来的【情绪】现在还剩下多少」
 //
-// ⭐ 遗忘曲线在这里的唯一用途：**注入时按轮次远近排序**
-//   R(t) = exp(−λ · Δturn)
-//   λ 由「ρ 按轮次衰减」标定 ⇒ 与引擎同一个时间轴（设定者说的"解析 ρ 轮次问题"）
-//   ρ = 0.927 ⇒ λ = −ln(ρ) = 0.07581 ⇒ 半衰期 9.14 轮
+// ⭐ 第二条更正：「S 那就挂评价层上，因为是评价得出结论的然后出的情绪」
+//   ⇒ S 由评价层产出的 intensity 决定（不是引擎的 ‖E−μ‖，也不是词库的 strong/mild）
+//
+// ────────────────────────────────────────────────
+// 条目仍只有四样（+ intensity），摘要与情绪词由模型自己提取：
+//   { turn, at, summary, emotion, intensity }
+//
+// 情绪衰减：R = exp(−Δturn / S)     ⭐ R = 这条情绪事件【残余的情绪强度】
+//           S = S0 · (1 + k · intensity)   ⭐ S 挂评价层
+//
+// ⚠️ 仍然【不做】的（设定者明确不要"他们那种复杂的构造"）：
+//   复习通道 · 成功/失败双分支 · traits(记仇/记爱/记恨) · driftVector
 'use strict';
 
 class EmotionMemory {
   /**
    * @param {object} o
-   * @param {number} o.lambda  按轮次的遗忘速率；默认对齐引擎的 ρ=0.927
-   * @param {number} o.topK    每次最多注入几条
-   * @param {number} o.minR    可提取性低于此则不再注入（真遗忘）
+   * @param {number} o.S0     基准情绪稳定性（轮）—— intensity=0 时情绪多久散一半
+   * @param {number} o.k      强度增益：intensity=1 的情绪，S 是基准的 (1+k) 倍
+   * @param {number} o.topK   每次最多注入几条
+   * @param {number} o.minR   情绪残余低于此则不再注入
    */
-  constructor({ lambda = 0.07581, topK = 4, minR = 0.05 } = {}) {
-    this.lambda = lambda;
+  constructor({ S0 = 30, k = 4, topK = 4, minR = 0.05 } = {}) {
+    this.S0 = S0;
+    this.k = k;
     this.topK = topK;
     this.minR = minR;
     /** @type {object[]} */
     this.entries = [];
   }
 
-  /** 半衰期（轮）—— 供审计 */
-  get halfLife() { return Math.log(2) / this.lambda; }
+  /**
+   * ⭐ S（情绪稳定性）—— 挂评价层
+   * @param {number} intensity 评价层产出的情绪强度（0–1，由模型判断）
+   */
+  stabilityFor(intensity) {
+    const i = Math.max(0, Math.min(1, Number(intensity) || 0));
+    return this.S0 * (1 + this.k * i);
+  }
 
   /**
-   * ⭐ 录入一条记忆。摘要与情绪词【由模型提供】，本模块只是存下来。
+   * ⭐ 录入一条【情绪事件】。摘要、情绪词、强度都由模型/评价层提供。
    *
    * @param {object} o
-   * @param {number} o.turn    轮次步数
-   * @param {string} o.at      时间戳（ISO）
-   * @param {string} o.summary 事件摘要 —— ⭐ 模型提取
-   * @param {string} o.emotion 情绪词 —— ⭐ 模型提取
-   * @param {string[]} [o.keywords] 触发用关键词（不给则从 summary 里切）
+   * @param {number} o.turn       轮次步数
+   * @param {string} o.at         时间戳（ISO）
+   * @param {string} o.summary    事件摘要 —— ⭐ 模型提取
+   * @param {string} o.emotion    情绪词   —— ⭐ 模型提取
+   * @param {number} o.intensity  情绪强度 —— ⭐ 评价层产出
+   * @param {string[]} [o.keywords] 触发关键词（不给则从 summary 切）
    */
-  add({ turn, at = null, summary, emotion, keywords = null }) {
+  add({ turn, at = null, summary, emotion, intensity = 0, keywords = null }) {
     const e = {
       turn,
       at,
       summary: String(summary || '').trim(),
       emotion: String(emotion || '').trim(),
+      intensity: Math.max(0, Math.min(1, Number(intensity) || 0)),
       keywords: keywords && keywords.length ? keywords.slice() : keywordsFrom(summary),
     };
+    e.S = this.stabilityFor(e.intensity);      // ⭐ 写入时定下"这条情绪多难忘"
     this.entries.push(e);
     return e;
   }
 
-  /** ⭐ 遗忘曲线 R = exp(−λ·Δturn) */
-  retrievability(entry, nowTurn) {
-    return Math.exp(-this.lambda * Math.max(0, nowTurn - entry.turn));
+  /**
+   * ⭐ 情绪残余：R = exp(−Δturn / S)
+   *   R = 1    情绪还是当初那么强
+   *   R = 0.5  只剩一半
+   */
+  residual(entry, nowTurn) {
+    return Math.exp(-Math.max(0, nowTurn - entry.turn) / entry.S);
+  }
+
+  /** 这条情绪"还能持续多久"（R 掉到 minR 的轮数） */
+  emotionLife(entry) {
+    return entry.S * Math.log(1 / this.minR);
   }
 
   /**
-   * ⭐ 检索：关键词命中 + 遗忘曲线排序
-   *
+   * ⭐ 检索：关键词命中 + 情绪残余排序
    * @param {number} nowTurn
-   * @param {string} hint      当前上下文/事件（用于关键词匹配）；给 null 则不过滤
+   * @param {string} hint   当前上下文/事件；null 则不过滤
    * @param {number} [k]
    */
   retrieve(nowTurn, hint = null, k = null) {
     const K = k === null ? this.topK : k;
     const alive = this.entries
-      .map(e => ({ entry: e, R: this.retrievability(e, nowTurn) }))
+      .map(e => ({ entry: e, R: this.residual(e, nowTurn) }))
       .filter(x => x.R >= this.minR);
-    // ⭐ 关键词触发（设定者："只要模型还留有记忆那按关键词或者摘要触发即可"）
     let pool = alive;
     if (hint) {
       const toks = tokenize(hint);
       const matched = alive.filter(x =>
         x.entry.keywords.some(w => toks.some(t => t.includes(w) || w.includes(t))));
-      // ⭐ 命中就用命中的；一条都没命中就退回全体（仍按遗忘曲线）
       if (matched.length) pool = matched;
     }
     return pool.sort((a, b) => b.R - a.R).slice(0, K);
   }
 
-  /** 自然语言注入（相对时间词，非时间戳） */
+  /** 自然语言注入（相对时间词；标出情绪还剩多少） */
   render(hits, nowTurn) {
     if (!hits.length) return '';
-    const lines = hits.map(({ entry }) =>
-      '· ' + relTime(nowTurn - entry.turn) + ' ' + entry.summary +
-      (entry.emotion ? '（你当时' + entry.emotion + '）' : ''));
+    const lines = hits.map(({ entry, R }) => {
+      const faded = R >= 0.7 ? '' : R >= 0.4 ? '（心情已经淡了些）' : '（只记得个大概了）';
+      return '· ' + relTime(nowTurn - entry.turn) + ' ' + entry.summary +
+        (entry.emotion ? '（你当时' + entry.emotion + '）' : '') + faded;
+    });
     return '【你还记得的】\n' + lines.join('\n');
   }
 
-  /** 全部条目（供落盘/调试） */
   all() { return this.entries.slice(); }
   get size() { return this.entries.length; }
 }
 
 // ────────────────────────────────────────────────
-// 小工具
-// ────────────────────────────────────────────────
-
-/** 中文按 2-gram 切，英文按词切 —— 足够做"关键词或摘要触发" */
 function tokenize(s) {
   const out = [];
   const t = String(s || '');
@@ -113,8 +131,6 @@ function tokenize(s) {
   }
   return [...new Set(out)];
 }
-
-/** 没给 keywords 时，从摘要里取 2-gram 当关键词 */
 function keywordsFrom(summary) {
   const out = [];
   for (const seg of (String(summary || '').match(/[\u4e00-\u9fa5]{2,}/g) || [])) {
@@ -122,7 +138,6 @@ function keywordsFrom(summary) {
   }
   return [...new Set(out)].slice(0, 12);
 }
-
 function relTime(d) {
   if (d <= 1) return '刚才';
   if (d <= 3) return '方才几轮';

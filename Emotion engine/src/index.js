@@ -1,4 +1,4 @@
-// 情绪引擎 —— 统一出口
+﻿// 情绪引擎 —— 统一出口
 //
 //   const EE = require('./src');
 //   const c = new EE.Character({ name: '傲娇大肥鱼', sigma: 0.50, muPreset: 'dependent' });
@@ -59,5 +59,5 @@ module.exports = {
   Character: engine.Character,
 
   /** 版本 —— ⚠️ 必须与 VERSION 文件同步（此前长期停在 0.1.0-beta，已修正） */
-  VERSION: '0.1.13-beta',
+  VERSION: '0.1.14-beta',
 };
