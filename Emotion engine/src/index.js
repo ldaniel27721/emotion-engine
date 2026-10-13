@@ -49,15 +49,15 @@ module.exports = {
   ConceptPrior: lexicon.ConceptPrior,
   THEME_TO_GOAL: lexicon.THEME_TO_GOAL,
 
-  // ⭐ 情绪记忆（docs/12 · issue #1）
-  //   遗忘曲线 R = exp(−t/S)（SuperMemo / Wozniak 1995）
-  //   情绪强度进 S —— "更容易记住让大肥鱼体验强烈的情绪及其事件"
+  // ⭐ 情绪记忆（docs/12 · issue #1）—— 简化版（设定者 2026-10-13 规格）
+  //   条目 = 轮次 / 时间戳 / 摘要 / 情绪词（摘要与情绪词由模型自己提取）
+  //   注入 = 按遗忘曲线 R = exp(−λ·Δturn) 排序，λ 对齐引擎的 ρ
   EmotionMemory: memory.EmotionMemory,
-  valenceSign: memory.valenceSign,
+  tokenize: memory.tokenize,
 
   // 组装
   Character: engine.Character,
 
   /** 版本 —— ⚠️ 必须与 VERSION 文件同步（此前长期停在 0.1.0-beta，已修正） */
-  VERSION: '0.1.12-beta',
+  VERSION: '0.1.13-beta',
 };

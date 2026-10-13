@@ -1,210 +1,135 @@
-// ⭐ 情绪记忆模块（docs/12 的第 1 步）
+// ⭐ 情绪记忆（简化版）—— 设定者 2026-10-13 最终规格
 //
-// 遗忘曲线：R = exp(−t / S)
-//   出处：SuperMemo，Wozniak, Gorzelanczyk, Murakowski (1995)
-//         https://supermemo.guru/wiki/Forgetting_curve
-//     R - probability of recall (retrievability of memory)
-//     S - strength of a memory trace (stability of memory)
-//     t - time
+// 设定者原话：
+//   「就是模型本身对事件的判断，然后把事件精简成某些提示词或者情绪词录入记忆系统，
+//     打上时间戳或者轮次步数，我们这个记忆系统只需要模型自己去提取关于这个事件的
+//     摘要和情绪就可以了，我们不需要他们那种复杂的系统构造。」
 //
-// ⭐ 原文要点（逐字）：
-//   · "if all words are reviewed again, their stability will increase and
-//      retention time will be extended. This is used in spaced repetition"
-//   · "Forgetting is exponential, however, superposition of forgetting rates
-//      for different stabilities will make forgetting follow the power law."
+// ⇒ ⭐ 条目只有四样：轮次 / 时间戳 / 摘要 / 情绪词
+//   · 摘要与情绪词【由模型自己提取】—— 本模块不做任何判断
+//   · 没有 S、没有 kEmotion、没有 kRecall、没有 traits、没有复习、没有失败分支
 //
-// ⭐⭐ 本项目的落法（设定者 2026-10-13 裁定）：
-//   · t 用【轮次】（记忆只在本会话保留；且引擎的 ρ 也按轮次，两者同轴）
-//   · 情绪强度 r 进【S】—— "更容易记住让大肥鱼体验强烈的情绪及其事件"
-//   · 记仇/记爱/记恨 = 人格特质调制（加权 S），它们【影响漂移】
-//
-// ⚠️ 诚实标注：R = exp(−t/S) 是 SuperMemo 的；
-//    而 "S 怎么随情绪强度变"（S = f(r)）**没有文献公式**，是本项目的设计。
+// ⭐ 遗忘曲线在这里的唯一用途：**注入时按轮次远近排序**
+//   R(t) = exp(−λ · Δturn)
+//   λ 由「ρ 按轮次衰减」标定 ⇒ 与引擎同一个时间轴（设定者说的"解析 ρ 轮次问题"）
+//   ρ = 0.927 ⇒ λ = −ln(ρ) = 0.07581 ⇒ 半衰期 9.14 轮
 'use strict';
-
-const V = require('./space').V;
-
-/** 效价的符号：正 / 负 / 中 */
-function valenceSign(v) {
-  if (v > 0.05) return 'pos';
-  if (v < -0.05) return 'neg';
-  return 'mid';
-}
 
 class EmotionMemory {
   /**
    * @param {object} o
-   * @param {number} o.S0          基准记忆稳定性（轮）。R=0.5 时 t = S·ln2
-   * @param {number} o.kEmotion    情绪强度对 S 的放大系数：S = S0·(1 + k·r)
-   * @param {number} o.kRecall     每次被想起 ⇒ S 增长系数（间隔重复的核心）
-   * @param {number} o.minR        低于此可提取性则不再注入（真遗忘）
-   * @param {object} o.traits      人格特质：{ neg, pos, object }
-   *                               记仇=neg · 记爱=pos · 记恨=object
-   * @param {number} o.maxS        S 上限（防反复想起导致失控）
+   * @param {number} o.lambda  按轮次的遗忘速率；默认对齐引擎的 ρ=0.927
+   * @param {number} o.topK    每次最多注入几条
+   * @param {number} o.minR    可提取性低于此则不再注入（真遗忘）
    */
-  constructor({
-    S0 = 30, kEmotion = 4, kRecall = 0.5, minR = 0.05,
-    traits = { neg: 1.0, pos: 1.0, object: 1.0 },
-    maxS = null,                 // 默认 S0·(1+kEmotion)·max(traits)
-  } = {}) {
-    this.S0 = S0;
-    this.kEmotion = kEmotion;
-    this.kRecall = kRecall;
+  constructor({ lambda = 0.07581, topK = 4, minR = 0.05 } = {}) {
+    this.lambda = lambda;
+    this.topK = topK;
     this.minR = minR;
-    this.traits = Object.assign({ neg: 1.0, pos: 1.0, object: 1.0 }, traits);
-    this.maxS = maxS === null
-      ? S0 * (1 + kEmotion) * Math.max(this.traits.neg, this.traits.pos, this.traits.object)
-      : maxS;
-    /** @type {object[]} 记忆条目（按写入顺序） */
+    /** @type {object[]} */
     this.entries = [];
-    /** 统计：被检索命中过几次（供审计） */
-    this.recallCount = 0;
   }
 
-  // ═══════════════════════════════════════════════════════════
-  // S（稳定性）：由【当时的情绪强度】与【人格特质】共同决定
-  // ═══════════════════════════════════════════════════════════
+  /** 半衰期（轮）—— 供审计 */
+  get halfLife() { return Math.log(2) / this.lambda; }
+
   /**
-   * @param {number} r          当时的情绪强度 ‖E−μ‖
-   * @param {string} vSign      效价符号 pos / neg / mid
-   * @param {boolean} toObject  是否针对"在意的人/事/物"
-   */
-  stabilityFor(r, vSign, toObject = false) {
-    const base = this.S0 * (1 + this.kEmotion * Math.max(0, Math.min(1, r)));
-    const tm = (vSign === 'neg' ? this.traits.neg : vSign === 'pos' ? this.traits.pos : 1.0)
-      * (toObject ? this.traits.object : 1.0);
-    return Math.min(this.maxS, base * tm);
-  }
-
-  /** ⭐ 可提取性 R = exp(−t/S)；t 用【轮次差】 */
-  retrievability(entry, nowTurn) {
-    const t = Math.max(0, nowTurn - entry.turn);
-    return Math.exp(-t / entry.S);
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // 写入
-  // ═══════════════════════════════════════════════════════════
-  /**
+   * ⭐ 录入一条记忆。摘要与情绪词【由模型提供】，本模块只是存下来。
+   *
    * @param {object} o
-   * @param {number}   o.turn        轮次
-   * @param {string}   o.at          真实时间（ISO）—— 本会话保留，暂不参与打分
-   * @param {string}   o.event       事件摘要（自然语言）
-   * @param {string}   o.eventKey    事件类别
-   * @param {object}   o.emotion     { direction, octant, valence, r, E }
-   * @param {number}   o.importance  AET 一级评价的 importance
-   * @param {boolean}  o.toObject    是否针对在意的人/事/物
+   * @param {number} o.turn    轮次步数
+   * @param {string} o.at      时间戳（ISO）
+   * @param {string} o.summary 事件摘要 —— ⭐ 模型提取
+   * @param {string} o.emotion 情绪词 —— ⭐ 模型提取
+   * @param {string[]} [o.keywords] 触发用关键词（不给则从 summary 里切）
    */
-  add({ turn, at = null, event, eventKey = null, emotion, importance = 0.5, toObject = false }) {
-    const vSign = valenceSign(emotion.valence ?? 0);
-    const S = this.stabilityFor(emotion.r ?? 0, vSign, toObject);
+  add({ turn, at = null, summary, emotion, keywords = null }) {
     const e = {
-      turn, at, event, eventKey,
-      emotion: Object.assign({}, emotion),
-      importance,
-      vSign, toObject,
-      S,                       // ⭐ 写入时定下稳定性
-      recalls: 0,              // 被想起几次
+      turn,
+      at,
+      summary: String(summary || '').trim(),
+      emotion: String(emotion || '').trim(),
+      keywords: keywords && keywords.length ? keywords.slice() : keywordsFrom(summary),
     };
     this.entries.push(e);
     return e;
   }
 
-  // ═══════════════════════════════════════════════════════════
-  // 检索
-  // ═══════════════════════════════════════════════════════════
-  /**
-   * ⭐ 打分 = 可提取性 R × 重要性 importance
-   *    （设定者："按遗忘曲线分析记忆注入强度" ⇒ 主项是 R）
-   */
-  score(entry, nowTurn) {
-    return this.retrievability(entry, nowTurn) * entry.importance;
-  }
-
-  /** 当前所有记忆的 (条目, R, 分数)，按分数降序 */
-  ranked(nowTurn) {
-    return this.entries
-      .map(e => ({ entry: e, R: this.retrievability(e, nowTurn), score: this.score(e, nowTurn) }))
-      .sort((a, b) => b.score - a.score);
+  /** ⭐ 遗忘曲线 R = exp(−λ·Δturn) */
+  retrievability(entry, nowTurn) {
+    return Math.exp(-this.lambda * Math.max(0, nowTurn - entry.turn));
   }
 
   /**
-   * ⭐ 取 top-k 用于注入。被选中的记忆会【S 增长】（间隔重复）
+   * ⭐ 检索：关键词命中 + 遗忘曲线排序
+   *
    * @param {number} nowTurn
-   * @param {number} k
-   * @param {object} o
-   * @param {boolean} o.rehearse  是否把"被注入"当作一次复习（默认 true）
+   * @param {string} hint      当前上下文/事件（用于关键词匹配）；给 null 则不过滤
+   * @param {number} [k]
    */
-  retrieve(nowTurn, k = 4, { rehearse = true } = {}) {
-    const all = this.ranked(nowTurn);
-    // ⚠️ 真遗忘：低于 minR 的不再注入
-    const alive = all.filter(x => x.R >= this.minR);
-    const top = alive.slice(0, k);
-    if (rehearse) {
-      for (const x of top) {
-        x.entry.recalls++;
-        x.entry.S = Math.min(this.maxS, x.entry.S * (1 + this.kRecall));  // ⭐ 间隔重复
-        this.recallCount++;
-      }
+  retrieve(nowTurn, hint = null, k = null) {
+    const K = k === null ? this.topK : k;
+    const alive = this.entries
+      .map(e => ({ entry: e, R: this.retrievability(e, nowTurn) }))
+      .filter(x => x.R >= this.minR);
+    // ⭐ 关键词触发（设定者："只要模型还留有记忆那按关键词或者摘要触发即可"）
+    let pool = alive;
+    if (hint) {
+      const toks = tokenize(hint);
+      const matched = alive.filter(x =>
+        x.entry.keywords.some(w => toks.some(t => t.includes(w) || w.includes(t))));
+      // ⭐ 命中就用命中的；一条都没命中就退回全体（仍按遗忘曲线）
+      if (matched.length) pool = matched;
     }
-    return top;
+    return pool.sort((a, b) => b.R - a.R).slice(0, K);
   }
 
-  // ═══════════════════════════════════════════════════════════
-  // 注入渲染（自然语言，非 JSON）
-  // ═══════════════════════════════════════════════════════════
-  /**
-   * @param {object[]} hits  retrieve() 的返回值
-   * @param {number}   nowTurn
-   */
+  /** 自然语言注入（相对时间词，非时间戳） */
   render(hits, nowTurn) {
     if (!hits.length) return '';
-    const relTime = (t) => {
-      const d = nowTurn - t;
-      if (d <= 1) return '刚才';
-      if (d <= 3) return '方才几轮';
-      if (d <= 8) return '早些时候';
-      if (d <= 20) return '之前一阵';
-      return '很久以前';
-    };
-    const lines = hits.map(({ entry }) => {
-      const emo = entry.emotion;
-      const dirCN = {
-        Happiness: '开心', Caring: '软下来', Calm: '平静', Anger: '生气',
-        Fear: '害怕', Confusion: '困惑', Remorse: '自责', Hurt: '难受',
-        Contempt: '看不上', Depression: '沮丧', Loneliness: '孤单', Inadequate: '觉得自己不够好',
-      }[emo.direction] || emo.direction || '说不清';
-      const strength = emo.r >= 0.7 ? '特别' : emo.r >= 0.4 ? '挺' : '有点';
-      return '· ' + relTime(entry.turn) + ' ' + entry.event + ' → 你当时' + strength + dirCN;
-    });
+    const lines = hits.map(({ entry }) =>
+      '· ' + relTime(nowTurn - entry.turn) + ' ' + entry.summary +
+      (entry.emotion ? '（你当时' + entry.emotion + '）' : ''));
     return '【你还记得的】\n' + lines.join('\n');
   }
 
-  // ═══════════════════════════════════════════════════════════
-  // 供 μ 漂移用：记忆的加权向量和
-  // ═══════════════════════════════════════════════════════════
-  /**
-   * ⭐ 漂移输入 = Σ R(now) · 情绪向量
-   *    ⚠️ 注意：这是【喂 μ.drift()】用的，与注入 LLM 是两条独立路径（docs/12 §2 铁律）
-   */
-  driftVector(nowTurn) {
-    let acc = [0, 0, 0];
-    for (const e of this.entries) {
-      const R = this.retrievability(e, nowTurn);
-      if (R < this.minR) continue;
-      const vec = e.emotion.E || [0, 0, 0];
-      acc = V.add(acc, V.mul(V.unit(vec), R * e.importance));
-    }
-    return acc;
-  }
-
-  /** 供审计的摘要 */
-  describe(nowTurn) {
-    const r = this.ranked(nowTurn);
-    return r.map(x => '[' + x.entry.turn + '] R=' + x.R.toFixed(4) +
-      ' S=' + x.entry.S.toFixed(2) + ' score=' + x.score.toFixed(4) +
-      ' recalls=' + x.entry.recalls + '  ' + x.entry.event.slice(0, 20));
-  }
+  /** 全部条目（供落盘/调试） */
+  all() { return this.entries.slice(); }
+  get size() { return this.entries.length; }
 }
 
-module.exports = { EmotionMemory, valenceSign };
+// ────────────────────────────────────────────────
+// 小工具
+// ────────────────────────────────────────────────
+
+/** 中文按 2-gram 切，英文按词切 —— 足够做"关键词或摘要触发" */
+function tokenize(s) {
+  const out = [];
+  const t = String(s || '');
+  for (const m of (t.match(/[A-Za-z][A-Za-z0-9_-]{1,}/g) || [])) out.push(m.toLowerCase());
+  for (const seg of (t.match(/[\u4e00-\u9fa5]+/g) || [])) {
+    if (seg.length === 1) { out.push(seg); continue; }
+    for (let i = 0; i + 2 <= seg.length; i++) out.push(seg.slice(i, i + 2));
+  }
+  return [...new Set(out)];
+}
+
+/** 没给 keywords 时，从摘要里取 2-gram 当关键词 */
+function keywordsFrom(summary) {
+  const out = [];
+  for (const seg of (String(summary || '').match(/[\u4e00-\u9fa5]{2,}/g) || [])) {
+    for (let i = 0; i + 2 <= seg.length; i++) out.push(seg.slice(i, i + 2));
+  }
+  return [...new Set(out)].slice(0, 12);
+}
+
+function relTime(d) {
+  if (d <= 1) return '刚才';
+  if (d <= 3) return '方才几轮';
+  if (d <= 8) return '早些时候';
+  if (d <= 20) return '之前一阵';
+  if (d <= 50) return '很久以前';
+  return '很早以前';
+}
+
+module.exports = { EmotionMemory, tokenize };

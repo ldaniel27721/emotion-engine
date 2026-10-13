@@ -1,170 +1,126 @@
-﻿// 情绪记忆模块的断言测试
+﻿// 情绪记忆（简化版）测试 —— 设定者 2026-10-13 规格
 'use strict';
-const { EmotionMemory, valenceSign } = require('../src/memory');
-const V = require('../src/space').V;
-
-const hr = s => '\n' + '═'.repeat(86) + '\n' + s + '\n' + '═'.repeat(86);
+const { EmotionMemory, tokenize } = require('../src/memory');
+const hr = s => '\n' + '═'.repeat(84) + '\n' + s + '\n' + '═'.repeat(84);
 const f = (x, d = 4) => Number(x).toFixed(d);
 let PASS = 0, FAIL = 0;
-const check = (n, ok, d = '') => { console.log('  ' + (ok ? '✅ PASS' : '❌ FAIL') + '  ' + n + (d ? '   ' + d : '')); ok ? PASS++ : FAIL++; };
-
-const mkEmo = (o) => Object.assign({ direction: 'Happiness', octant: 'Exuberant', valence: 0.7, r: 0.5, E: [0.4, 0.3, 0.2] }, o);
+const ck = (n, ok, d = '') => { console.log('  ' + (ok ? '✅ PASS' : '❌ FAIL') + '  ' + n + (d ? '   ' + d : '')); ok ? PASS++ : FAIL++; };
 
 // ═════════════════════════════════════════════════
-console.log(hr('① 遗忘曲线：R = exp(−t/S) —— 与 SuperMemo 一致'));
+console.log(hr('① 条目只有四样：轮次 / 时间戳 / 摘要 / 情绪词'));
 
 {
-  const m = new EmotionMemory({ S0: 30, kEmotion: 0 });   // k=0 ⇒ S 恒为 S0
-  const e = m.add({ turn: 0, event: 'x', emotion: mkEmo({ r: 0 }), importance: 1.0 });
-  check('S = S0 = 30', Math.abs(e.S - 30) < 1e-12);
-  check('t=0 ⇒ R=1', Math.abs(m.retrievability(e, 0) - 1) < 1e-12);
-  check('t=S ⇒ R=exp(−1)=0.36788', Math.abs(m.retrievability(e, 30) - Math.exp(-1)) < 1e-12,
-    f(m.retrievability(e, 30), 6));
-  check('t=30·ln2 ⇒ R=0.5（半衰期）', Math.abs(m.retrievability(e, 30 * Math.LN2) - 0.5) < 1e-12);
-  console.log('  ⭐ 公式出处：SuperMemo，Wozniak/Gorzelanczyk/Murakowski 1995');
+  const m = new EmotionMemory();
+  const e = m.add({
+    turn: 12, at: '2026-10-13T13:00:00+08:00',
+    summary: '用户说「你今天有点可爱」',
+    emotion: '嘴上不认但心里开心',
+  });
+  console.log('  ' + JSON.stringify(e).slice(0, 200));
+  ck('有 turn', e.turn === 12);
+  ck('有 at（时间戳）', typeof e.at === 'string');
+  ck('有 summary（摘要）', e.summary.length > 0);
+  ck('有 emotion（情绪词）', e.emotion.length > 0);
+  ck('⭐ 没有 S 字段', e.S === undefined);
+  ck('⭐ 没有 recalls 字段', e.recalls === undefined);
+  ck('自动切了关键词', e.keywords.length > 0, e.keywords.slice(0, 5).join('/'));
 }
 
 // ═════════════════════════════════════════════════
-console.log(hr('② ⭐ 情绪强度进 S：越强烈记得越久'));
+console.log(hr('② 遗忘曲线：只剩【一个全局 λ】，不再逐条 S'));
 
 {
-  const m = new EmotionMemory({ S0: 30, kEmotion: 4 });
-  const S = [0, 0.1, 0.3, 0.5, 0.7, 0.9, 1.0].map(r => m.stabilityFor(r, 'pos'));
-  console.log('  r  = ' + [0, 0.1, 0.3, 0.5, 0.7, 0.9, 1.0].map(x => f(x, 2).padStart(8)).join(''));
-  console.log('  S  = ' + S.map(x => f(x, 2).padStart(8)).join(''));
-  check('S 随 r 单调增', S.every((x, i) => i === 0 || x > S[i - 1]));
-  check('r=0 ⇒ S=S0', Math.abs(S[0] - 30) < 1e-12);
-  check('r=1 ⇒ S=S0·(1+k)=150', Math.abs(S[6] - 150) < 1e-12);
-  check('最大值是最小值的 5 倍', Math.abs(S[6] / S[0] - 5) < 1e-12);
-
-  // 200 轮后的残留
-  const m2 = new EmotionMemory({ S0: 30, kEmotion: 4 });
-  const eLo = m2.add({ turn: 0, event: '平淡', emotion: mkEmo({ r: 0.1 }), importance: 1 });
-  const eHi = m2.add({ turn: 0, event: '强烈', emotion: mkEmo({ r: 1.0 }), importance: 1 });
-  console.log('  200 轮后：平淡 R=' + f(m2.retrievability(eLo, 200)) + '   强烈 R=' + f(m2.retrievability(eHi, 200)));
-  check('强烈情绪的残留 >> 平淡的', m2.retrievability(eHi, 200) > 20 * m2.retrievability(eLo, 200));
+  const m = new EmotionMemory({ lambda: 0.07581 });
+  console.log('  λ = ' + m.lambda + '  ⇒ 半衰期 ' + f(m.halfLife, 2) + ' 轮');
+  ck('半衰期 ≈ 9.14 轮（对齐引擎 ρ=0.927）', Math.abs(m.halfLife - 9.14) < 0.02, f(m.halfLife, 3));
+  const e = m.add({ turn: 0, summary: 'x', emotion: 'y' });
+  ck('t=0 ⇒ R=1', Math.abs(m.retrievability(e, 0) - 1) < 1e-12);
+  ck('t=半衰期 ⇒ R=0.5', Math.abs(m.retrievability(e, m.halfLife) - 0.5) < 1e-12);
+  console.log('  ' + 'Δ轮'.padEnd(8) + 'R');
+  for (const d of [1, 3, 5, 9.14, 15, 20, 30, 40]) {
+    console.log('  ' + String(d).padEnd(8) + f(m.retrievability(e, d)));
+  }
 }
 
 // ═════════════════════════════════════════════════
-console.log(hr('③ 人格特质调制（记仇 / 记爱 / 记恨）'));
+console.log(hr('③ ⭐ 关键词 / 摘要触发'));
 
 {
-  const base = { S0: 30, kEmotion: 4 };
-  const r = 0.8;
-  const balanced = new EmotionMemory(Object.assign({}, base, { traits: { neg: 1, pos: 1, object: 1 } }));
-  const grudgy = new EmotionMemory(Object.assign({}, base, { traits: { neg: 2, pos: 1, object: 1 } }));
-  const loving = new EmotionMemory(Object.assign({}, base, { traits: { neg: 1, pos: 2, object: 1 } }));
-  const hateful = new EmotionMemory(Object.assign({}, base, { traits: { neg: 1, pos: 1, object: 2 } }));
+  const m = new EmotionMemory();
+  m.add({ turn: 1, summary: '用户说「你今天有点可爱」', emotion: '开心' });
+  m.add({ turn: 5, summary: '用户没接话，转头说别的', emotion: '难受' });
+  m.add({ turn: 9, summary: '用户说「你其实很在意吧」', emotion: '被戳中' });
+  m.add({ turn: 14, summary: '聊起了原神的配队', emotion: '平静' });
 
-  check('平衡型：正负相同', Math.abs(balanced.stabilityFor(r, 'neg') - balanced.stabilityFor(r, 'pos')) < 1e-12);
-  check('记仇型：负性 S 是平衡的 2 倍', Math.abs(grudgy.stabilityFor(r, 'neg') / balanced.stabilityFor(r, 'neg') - 2) < 1e-12);
-  check('记仇型：不影响正性', Math.abs(grudgy.stabilityFor(r, 'pos') - balanced.stabilityFor(r, 'pos')) < 1e-12);
-  check('记爱型：正性 S 是平衡的 2 倍', Math.abs(loving.stabilityFor(r, 'pos') / balanced.stabilityFor(r, 'pos') - 2) < 1e-12);
-  check('记恨型：只对"对象"的负性加成', Math.abs(hateful.stabilityFor(r, 'neg', true) / balanced.stabilityFor(r, 'neg', true) - 2) < 1e-12);
-  check('记恨型：非对象不变', Math.abs(hateful.stabilityFor(r, 'neg', false) - balanced.stabilityFor(r, 'neg', false)) < 1e-12);
+  const t1 = m.retrieve(20, '你今天有点可爱');
+  console.log('  hint=「你今天有点可爱」 → ' + t1.length + ' 条：' + t1.map(x => x.entry.summary.slice(0, 14)).join(' ｜ '));
+  ck('命中相关记忆', t1.some(x => x.entry.summary.includes('可爱')));
+
+  const t2 = m.retrieve(20, '你其实很在意吧');
+  console.log('  hint=「你其实很在意吧」  → ' + t2.map(x => x.entry.summary.slice(0, 14)).join(' ｜ '));
+  ck('命中被戳中那条', t2.some(x => x.entry.summary.includes('在意')));
+
+  const t3 = m.retrieve(20, '毫不相关的外星话题 zzz');
+  console.log('  hint=无关串 → ' + t3.length + ' 条（退回全体，按遗忘曲线）');
+  ck('无命中时退回全体', t3.length > 0);
+
+  const t4 = m.retrieve(20, null);
+  ck('hint=null 时按遗忘曲线取全体', t4.length === 4);
+  console.log('  排序（时间近的在前）：' + t4.map(x => '[' + x.entry.turn + ']').join(' > '));
+  ck('按 R 降序（越近越前）', t4[0].entry.turn === 14);
 }
 
 // ═════════════════════════════════════════════════
-console.log(hr('④ 检索：按 R × importance 排序，取 top-k'));
+console.log(hr('④ 真遗忘：R 低于 minR 就不再注入'));
 
 {
-  const m = new EmotionMemory({ S0: 30, kEmotion: 4, traits: { neg: 1.3, pos: 1, object: 1 } });
-  m.add({ turn: 1, event: '平淡的好话', emotion: mkEmo({ r: 0.1, valence: 0.5 }), importance: 0.3 });
-  m.add({ turn: 5, event: '被戳中', emotion: mkEmo({ direction: 'Caring', valence: 0.76, r: 0.9 }), importance: 0.85 });
-  m.add({ turn: 10, event: '被责备', emotion: mkEmo({ direction: 'Anger', valence: -0.8, r: 0.85 }), importance: 0.8 });
-  const ranked = m.ranked(12);
-  console.log('  ' + ranked.map(x => '[' + x.entry.turn + '] ' + f(x.score)).join('  >  '));
-  check('排序按分数降序', ranked.every((x, i) => i === 0 || x.score <= ranked[i - 1].score));
-  check('平淡低重要的排最后', ranked[ranked.length - 1].entry.turn === 1);
-
-  const top2 = m.retrieve(12, 2, { rehearse: false });
-  check('top-k 截断正确', top2.length === 2);
-}
-
-// ═════════════════════════════════════════════════
-console.log(hr('⑤ 真遗忘：低于 minR 不再注入'));
-
-{
-  const m = new EmotionMemory({ S0: 10, kEmotion: 0, minR: 0.05 });
-  m.add({ turn: 0, event: '很久以前的小事', emotion: mkEmo({ r: 0 }), importance: 1.0 });
+  const m = new EmotionMemory({ lambda: 0.07581, minR: 0.05 });
+  m.add({ turn: 0, summary: '很久以前的事', emotion: '淡了' });
   const e = m.entries[0];
-  console.log('  S=10 ⇒ R(0)=' + f(m.retrievability(e, 0)) + '  R(20)=' + f(m.retrievability(e, 20)) +
-    '  R(30)=' + f(m.retrievability(e, 30)) + '  R(50)=' + f(m.retrievability(e, 50)));
-  check('R(30)=0.0498 < 0.05 ⇒ 已遗忘', m.retrievability(e, 30) < 0.05);
-  check('30 轮后 retrieve 返回空', m.retrieve(30, 5, { rehearse: false }).length === 0);
-  check('20 轮时还在', m.retrieve(20, 5, { rehearse: false }).length === 1);
+  const tLife = Math.log(1 / 0.05) / m.lambda;
+  console.log('  寿命（R 掉到 0.05）= ' + f(tLife, 1) + ' 轮');
+  ck('39 轮时还在', m.retrieve(39, null, 5).length === 1);
+  ck('40 轮时已遗忘', m.retrieve(40, null, 5).length === 0);
 }
 
 // ═════════════════════════════════════════════════
-console.log(hr('⑥ ⭐ 间隔重复：被想起 ⇒ S 增长（SuperMemo 核心）'));
+console.log(hr('⑤ 注入渲染：相对时间词 + "你当时…"'));
 
 {
-  const m = new EmotionMemory({ S0: 30, kEmotion: 0, kRecall: 0.5, maxS: 1000 });
-  m.add({ turn: 0, event: 'x', emotion: mkEmo({ r: 0 }), importance: 1.0 });
-  const e = m.entries[0];
-  const S0 = e.S;
-  const seq = [];
-  for (let i = 0; i < 6; i++) { m.retrieve(0, 1, { rehearse: true }); seq.push(e.S); }
-  console.log('  S 序列: ' + [S0].concat(seq).map(x => f(x, 2)).join(' → '));
-  console.log('  相对初始: ' + [S0].concat(seq).map(x => f(x / S0, 3)).join(' → '));
-  check('每次被想起 ⇒ S ×1.5', seq.every((s, i) => i === 0 || Math.abs(s / seq[i - 1] - 1.5) < 1e-9));
-  check('S 严格增长', seq.every((s, i) => i === 0 || s > seq[i - 1]));
-  check('recalls 被记录', e.recalls === 6, '实测 ' + e.recalls);
-}
-
-// ═════════════════════════════════════════════════
-console.log(hr('⑦ maxS 上限生效（防反复想起导致失控）'));
-
-{
-  const m = new EmotionMemory({ S0: 30, kEmotion: 4, kRecall: 0.5 });
-  m.add({ turn: 0, event: 'x', emotion: mkEmo({ r: 1.0 }), importance: 1.0 });
-  const e = m.entries[0];
-  for (let i = 0; i < 50; i++) m.retrieve(0, 1, { rehearse: true });
-  console.log('  50 次想起后 S = ' + f(e.S, 2) + '   maxS = ' + f(m.maxS, 2));
-  check('S 不超过 maxS', e.S <= m.maxS + 1e-9);
-}
-
-// ═════════════════════════════════════════════════
-console.log(hr('⑧ 注入渲染：自然语言 + 相对时间词'));
-
-{
-  const m = new EmotionMemory({ S0: 30, kEmotion: 4 });
-  m.add({ turn: 1, event: '用户说「你今天有点可爱」', emotion: mkEmo({ direction: 'Happiness', r: 0.3 }), importance: 0.7 });
-  m.add({ turn: 15, event: '用户说「你其实很在意吧」', emotion: mkEmo({ direction: 'Caring', r: 0.9 }), importance: 0.9 });
-  m.add({ turn: 18, event: '用户语气重了', emotion: mkEmo({ direction: 'Anger', valence: -0.8, r: 0.8 }), importance: 0.8 });
-  const txt = m.render(m.retrieve(20, 3, { rehearse: false }), 20);
+  const m = new EmotionMemory();
+  m.add({ turn: 1, summary: '用户说「你今天有点可爱」', emotion: '嘴上不认但心里开心' });
+  m.add({ turn: 15, summary: '用户说「你其实很在意吧」', emotion: '被戳中' });
+  m.add({ turn: 18, summary: '用户语气重了', emotion: '生气' });
+  const txt = m.render(m.retrieve(20, null, 3), 20);
   console.log(txt.split('\n').map(l => '    ' + l).join('\n'));
-  check('含【你还记得的】标题', txt.includes('【你还记得的】'));
-  check('用相对时间词（不含 ISO 时间戳）', !/\d{4}-\d{2}-\d{2}/.test(txt));
-  check('用"你当时"而非现在时', txt.includes('你当时'));
-  check('条数 = 3', txt.split('\n').length === 4);
+  ck('有标题', txt.includes('【你还记得的】'));
+  ck('用相对时间词（无 ISO 时间戳）', !/\d{4}-\d{2}-\d{2}/.test(txt));
+  ck('用"你当时"', txt.includes('你当时'));
 }
 
 // ═════════════════════════════════════════════════
-console.log(hr('⑨ 漂移向量：记忆的加权向量和'));
+console.log(hr('⑥ 没被用到的复杂构造【确实删了】'));
 
 {
-  const m = new EmotionMemory({ S0: 30, kEmotion: 4 });
-  m.add({ turn: 1, event: 'a', emotion: mkEmo({ r: 0.1, E: [1, 0, 0] }), importance: 1 });
-  m.add({ turn: 5, event: 'b', emotion: mkEmo({ r: 0.9, E: [-1, 0, 0] }), importance: 1 });
-  const dv = m.driftVector(6);
-  console.log('  漂移向量 = ' + V.fmt(dv, 5));
-  check('漂移向量非零', V.norm(dv) > 0);
-  check('强记忆（轮5，指向 −P）主导 ⇒ P 分量为负', dv[0] < 0, 'P=' + f(dv[0], 5));
+  const m = new EmotionMemory();
+  console.log('  实例上的键: ' + Object.keys(m).join(', '));
+  for (const k of ['S0', 'kEmotion', 'kRecall', 'traits', 'maxS', 'recallCount']) {
+    ck('已删除 ' + k, m[k] === undefined);
+  }
+  for (const f2 of ['stabilityFor', 'driftVector', 'ranked', 'decayPrecision']) {
+    ck('已删除方法 ' + f2, typeof m[f2] === 'undefined');
+  }
+  console.log('  ⭐ 只剩: add / retrievability / retrieve / render / all / size / halfLife');
 }
 
 // ═════════════════════════════════════════════════
-console.log(hr('⑩ 本会话保留 ⇒ 无落盘（但可序列化）'));
-
+console.log(hr('⑦ tokenize 行为'));
 {
-  const m = new EmotionMemory({ S0: 30, kEmotion: 4 });
-  m.add({ turn: 1, event: 'a', emotion: mkEmo({}), importance: 0.5 });
-  check('模块本身不写文件（无 fs 依赖）', true, '（设计如此：本会话保留）');
-  const json = JSON.stringify(m.entries);
-  check('entries 可序列化', json.length > 0);
+  console.log('  tokenize("用户说「你今天有点可爱」") = ' + JSON.stringify(tokenize('用户说「你今天有点可爱」').slice(0, 10)));
+  ck('中文切出 2-gram', tokenize('你今天有点可爱').includes('可爱'));
+  ck('英文按词切', tokenize('hello world').includes('hello'));
 }
 
-// ═════════════════════════════════════════════════
 console.log(hr('汇总'));
 console.log(`  ✅ PASS ${PASS}   ❌ FAIL ${FAIL}`);
 process.exit(FAIL === 0 ? 0 : 1);
