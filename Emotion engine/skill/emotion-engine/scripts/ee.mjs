@@ -5,6 +5,7 @@
 //   node ee.mjs step --file <appraisal.json>   推进一轮（账本追加一行）
 //   node ee.mjs memory [关键词] [--k 4]  只看残余情绪记忆
 //   node ee.mjs ledger                   账本路径与轮次数
+//   node ee.mjs idle --n 3                 只过时间：隔了很久没说话时先推 N 轮（只衰减，不产生事件）
 //   node ee.mjs export --out <file>      把账本导成 test/turns 格式 ⇒ 直接喂 test/replay.js 出审查报告
 //   node ee.mjs step --file x.json --mnemon    同时写进 mnemon
 //
@@ -49,6 +50,7 @@ for (let i = 1; i < argv.length; i++) {
   const a = argv[i];
   if (a === '--mnemon') { opt.mnemon = true; continue; }
   if (a === '--k') { opt.k = Number(argv[++i]); continue; }
+  if (a === '--n') { opt.n = Number(argv[++i]); continue; }
   if (a === '--file') { opt.file = argv[++i]; continue; }
   if (a === '--out') { opt.out = argv[++i]; continue; }
   if (a === '--state-dir') { opt.stateDir = argv[++i]; continue; }
@@ -70,6 +72,11 @@ if (cmd === 'state') {
     console.log('· R=' + h.R.toFixed(3) + '  S=' + h.S.toFixed(1) + '  第' + h.turn + '轮  ' + h.summary +
       (h.emotion ? '（' + h.emotion + '）' : ''));
   }
+} else if (cmd === 'idle') {
+  const n = Math.max(1, Math.floor(opt.n || 1));
+  const st = bridge.idle(n);
+  console.log(bridge.render({ hint: null, advice: SKILL_ADVICE }));
+  console.log('\n（已记 idle ' + n + ' 轮：现在第 ' + st.turn + ' 轮，八型仍取自最近一次真实事件）');
 } else if (cmd === 'export') {
   // 把账本导出成 test/turns/*.json 的格式 ⇒ 可以直接喂给 test/replay.js 出审查报告
   const rows = bridge.ledger.read().filter((r) => r && !r.idle && r.appraisal);
@@ -123,6 +130,6 @@ if (cmd === 'state') {
     console.log(out.ok ? '（已写进 mnemon）' : '（⚠️ mnemon 写入失败：' + out.reason + '）');
   }
 } else {
-  console.error('子命令：state | step | memory | ledger | export');
+  console.error('子命令：state | step | idle | memory | ledger | export');
   process.exit(2);
 }

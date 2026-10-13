@@ -147,6 +147,11 @@ export class EmotionBridge {
   }
 
   _apply(row, { replay = false } = {}) {
+    // ⭐ 时间流逝行：只推进动力学，不产生情绪事件（八型仍取自最近一次真实事件）
+    if (row && row.idle) {
+      this.character.idle(Number(row.idle) || 1);
+      return null;
+    }
     const rec = this.character.step({
       appraisal: row.appraisal || {},
       eventKey: row.eventKey || null,

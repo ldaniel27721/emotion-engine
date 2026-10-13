@@ -96,6 +96,22 @@ test('⭐ strategyScale=null 不能把 g 乘成 0（E 必须真的动）', () =>
   assert.ok(moved, 'ΔE 被乘成 0 了：null 必须归一成 undefined（engine 用 ===undefined 判断）');
 });
 
+test('⭐ 空闲（idle）也要能重放：只衰减、不产生事件', () => {
+  const dir = tmp();
+  const a = new EmotionBridge({ stateDir: dir });
+  a.advance(TURNS[0]);
+  a.advance(TURNS[1]);
+  const peak = a.state().r;
+  a.idle(5);
+  const faded = a.state().r;
+  assert.ok(faded < peak, '空闲只会让 |E−μ| 变小：' + peak + ' → ' + faded);
+
+  const b = new EmotionBridge({ stateDir: dir }).load();
+  assert.equal(b.state().turn, a.state().turn);
+  assert.ok(Math.abs(b.state().r - faded) < 1e-12, 'idle 行必须按 idle 重放，不能当成一次 step');
+  assert.equal(b.state().octant, a.state().octant, '八型仍取自最近一次真实事件');
+});
+
 test('pickAppraisal 只留九项，脏字段被挡掉', () => {
   const out = pickAppraisal({ relevance: 0.5, text: '脏', summary: '脏', __proto__x: 1, congruence: -0.2 });
   assert.deepEqual(Object.keys(out).sort(), ['congruence', 'relevance']);
